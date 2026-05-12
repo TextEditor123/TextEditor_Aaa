@@ -7852,6 +7852,10 @@ function EDITOR_throttle_scroll(func, wait, options = { leading: false, trailing
     };
 }
 
+/*
+I can move all the throttles to be direct?
+*/
+
 // TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
 //
 // Google AI overview for "javascript throttle trailing edge" generated this code:
