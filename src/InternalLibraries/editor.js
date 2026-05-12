@@ -5302,7 +5302,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
             }
     
             if (EDITOR_pooledTrackedSyntax.start > substart) {
-                if (false && JS_line_lex) {
+                if (JS_line_lex) {
                     let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
                     childIndex = JS_line_lex(div, substart, subend, childIndex);
                     substart += (subend - substart);
@@ -5360,7 +5360,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
         }
     
         if (substart < line.end) {
-            if (false && JS_line_lex) {
+            if (JS_line_lex) {
                 childIndex = JS_line_lex(div, substart, line.end, childIndex);
             }
             else {
