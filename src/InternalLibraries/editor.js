@@ -921,15 +921,12 @@ EDITOR_cursorListElement.appendChild(EDITOR_primaryCursor.caretRow);
  */
 let EDITOR_cursorList = [EDITOR_primaryCursor];
 
-let EDITOR_throttleMousemove = (...args) => {};
-let EDITOR_throttleScroll = (...args) => {};
 let EDITOR_throttleResize = (...args) => {};
 
 /*
 If an exception occurs, you need to set the throttle timer to null,
 otherwise no further events will ever run, because it was left in a bad state.
 */
-let EDITOR_restoreThrottle_mouseMove = () => {};
 let EDITOR_restoreThrottle_resize = () => {};
 
 let EDITOR_isSourceOfLeftMouseButton = false;
@@ -3749,7 +3746,7 @@ function EDITOR_registerHandlers() {
 
         if (event.button === 0) {
             EDITOR_isSourceOfLeftMouseButton = true;
-            EDITOR_restoreThrottle_mouseMove();
+            EDITOR_onMouseMove_timer = null;
         }
 
         let rY = event.clientY - EDITOR_recentBoundingClientRect.top + EDITOR_baseElement.scrollTop;
