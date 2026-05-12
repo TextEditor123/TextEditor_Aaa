@@ -930,7 +930,6 @@ If an exception occurs, you need to set the throttle timer to null,
 otherwise no further events will ever run, because it was left in a bad state.
 */
 let EDITOR_restoreThrottle_mouseMove = () => {};
-let EDITOR_restoreThrottle_scroll = () => {};
 let EDITOR_restoreThrottle_resize = () => {};
 
 let EDITOR_isSourceOfLeftMouseButton = false;
@@ -3779,8 +3778,7 @@ function EDITOR_registerHandlers() {
     EDITOR_throttleMousemove = EDITOR_throttle_mouseMove(EDITOR_onMouseMove, 90, { leading: true, trailing: true });
     EDITOR_baseElement.addEventListener('mousemove', EDITOR_wrapOnMouseMove.bind(this));
 
-    EDITOR_throttleScroll = EDITOR_throttle_scroll(EDITOR_onScroll, 100, { leading: true, trailing: true });
-    EDITOR_baseElement.addEventListener('scroll', EDITOR_throttleScroll.bind(this));
+    EDITOR_baseElement.addEventListener('scroll', EDITOR_onScroll_WRAPIT.bind(this));
 
     EDITOR_baseElement.addEventListener('wheel', event => {
         if (event.shiftKey) {
@@ -5100,6 +5098,8 @@ function EDITOR_drawHorizontalScrollbar() {
 let EDITOR_ONSCROLLvirtualLineIndex = -1;
 let EDITOR_ONSCROLLvirtualCount = -1;
 let EDITOR_ONSCROLLscrollTop = -1;
+let EDITOR_timer = null;
+let EDITOR_onScroll_bool = false;
 
 /**
  * TODO: remove this perceived-to-be-outdated TODO:
@@ -5107,8 +5107,28 @@ let EDITOR_ONSCROLLscrollTop = -1;
  * 
  * TODO: Too many verbose comments that are just ramblings
  */
+function EDITOR_onScroll_WRAPIT() {
+	const timeoutFunc = () => {
+        if (/*trailing && lastArgs*/ EDITOR_onScroll_bool) {
+            EDITOR_onScroll();
+            EDITOR_onScroll_bool = false;
+            EDITOR_timer = setTimeout(timeoutFunc, 100);
+        } else {
+            EDITOR_timer = null;
+        }
+    };
+
+	EDITOR_onScroll_bool = true;
+	
+    if (!EDITOR_timer) {
+        if (true /*options.leading*/) {
+            EDITOR_onScroll();
+        }
+        EDITOR_timer = setTimeout(timeoutFunc, 100);
+    }
+}
 function EDITOR_onScroll() {
-    EDITOR_finalizeAllCursors();
+	EDITOR_finalizeAllCursors();
     update_VirtualLineIndex();
 
     if (EDITOR_ONSCROLLscrollTop === EDITOR_baseElement.scrollTop &&
@@ -7816,45 +7836,6 @@ function EDITOR_throttle_mouseMove(func, wait, options = { leading: false, trail
         }
     };
 }
-
-// TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
-//
-// Google AI overview for "javascript throttle trailing edge" generated this code:
-function EDITOR_throttle_scroll(func, wait, options = { leading: false, trailing: true }) {
-    let timer = null;
-    let lastArgs;
-    let context;
-
-    EDITOR_restoreThrottle_scroll = () => {
-        timer = null;
-    };
-
-    const timeoutFunc = () => {
-        if (options.trailing && lastArgs) {
-            func.apply(context, lastArgs);
-            lastArgs = null;
-            timer = setTimeout(timeoutFunc, wait);
-        } else {
-            timer = null;
-        }
-    };
-
-    return function (...args) {
-        context = this;
-        lastArgs = args;
-
-        if (!timer) {
-            if (options.leading) {
-                func.apply(context, args);
-            }
-            timer = setTimeout(timeoutFunc, wait);
-        }
-    };
-}
-
-/*
-I can move all the throttles to be direct?
-*/
 
 // TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
 //
