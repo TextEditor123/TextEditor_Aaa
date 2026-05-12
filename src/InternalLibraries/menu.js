@@ -3,7 +3,6 @@ let MENU_target = null;
 let MENU_restoreFocusToElement = null;
 let MENU_optionList = [];
 let MENU_cursorIndex = 0;
-let MENU_throttleMousemove = (...args) => {};
 
 const MENU_optionListElement = document.getElementById('MENU_optionList');
 
@@ -146,8 +145,31 @@ const menuElement = document.getElementById('MENU');
 let recentBoundingClientRect = null;
 let recentBoundingClientRect_ID = null;
 
+let MENU_onMouseMove_timer = null;
+let MENU_onMouseMove_event = null;
+
+function MENU_onMouseMove_WRAPIT(event) {
+	const timeoutFunc = () => {
+        if (/*trailing && lastArgs*/ MENU_onMouseMove_event) {
+            MENU_onMouseMove(MENU_onMouseMove_event);
+            MENU_onMouseMove_event = null;
+            MENU_onMouseMove_timer = setTimeout(timeoutFunc, 90);
+        } else {
+            MENU_onMouseMove_timer = null;
+        }
+    };
+
+	MENU_onMouseMove_event = event;
+	
+    if (!MENU_onMouseMove_timer) {
+    	MENU_onMouseMove(event);
+        MENU_onMouseMove_timer = setTimeout(timeoutFunc, 90);
+    }
+}
+
 // TODO: I know this kinda is a mess but I'm all over the place right now and just trying to force some progress
-function MENU_onMouseMove(event, local_recentBoundingClientRect_ID) {
+function MENU_onMouseMove(event) {
+	let local_recentBoundingClientRect_ID = recentBoundingClientRect_ID;
     if (local_recentBoundingClientRect_ID != recentBoundingClientRect_ID)
         return;
     if (!recentBoundingClientRect) {
@@ -194,10 +216,6 @@ function menuGetRelativeMouseEventData(event, top) {
     };
 }
 
-function MENU_wrapOnMouseMove(event) {
-    MENU_throttleMousemove(event, recentBoundingClientRect_ID);
-}
-
 function MENU_init() {
 
     let menu = document.getElementById('MENU');
@@ -214,12 +232,7 @@ function MENU_init() {
     
     menu.addEventListener('keydown', MENU_onKeyDown);
 
-    // Google AI overview for "javascript throttle trailing edge" generated the 'throttle(...)' function
-    // ... I then asked how to invoke it and it gave me this:
-    //
-    // Using vanilla JS throttle with trailing edge support
-    MENU_throttleMousemove = MENU_throttle(MENU_onMouseMove, 90, { leading: true, trailing: true });
-    menu.addEventListener('mousemove', MENU_wrapOnMouseMove.bind(this));
+    menu.addEventListener('mousemove', MENU_onMouseMove_WRAPIT.bind(this));
 
     menuHide();
 }
@@ -274,47 +287,6 @@ function MENU_onKeyDown(event) {
             return optionOnClick(MENU_cursorIndex, MENU_optionListElement.children[MENU_cursorIndex], MENU_optionListElement);
     }
 }
-
-/*
-If an exception occurs, you need to set the throttle timer to null,
-otherwise no further events will ever run, because it was left in a bad state.
-*/
-let MENU_restoreThrottle = () => {};
-
-// Google AI overview for "javascript throttle trailing edge" generated this code:
-function MENU_throttle(func, wait, options = { leading: false, trailing: true }) {
-    let timer = null;
-    let lastArgs;
-    let context;
-
-    MENU_restoreThrottle = () => {
-        timer = null;
-    };
-
-    const timeoutFunc = () => {
-        if (options.trailing && lastArgs) {
-            func.apply(context, lastArgs);
-            lastArgs = null;
-            timer = setTimeout(timeoutFunc, wait);
-        } else {
-            timer = null;
-        }
-    };
-
-    return function (...args) {
-        context = this;
-        lastArgs = args;
-
-        if (!timer) {
-            if (options.leading) {
-                func.apply(context, args);
-            }
-            timer = setTimeout(timeoutFunc, wait);
-        }
-    };
-}
-
-
 
 // Is blur event guaranteed if you click something other than the menu?
 //
