@@ -37,6 +37,8 @@ Honestly idk what's wrong with you. You didn't do anything but it isn't bad prog
 and yet all in all I feel horrible.
 But... you never emptied the innerHTML. So your change is doing nothing yet.
 
+ugh you never removed the code that emptied the innerHTML... is what I mean to say...
+
 
 
 
