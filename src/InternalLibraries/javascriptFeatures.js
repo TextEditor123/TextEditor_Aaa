@@ -183,7 +183,7 @@ function lex_string(bytes, count, pos, trackedSyntaxList, terminator) {
     return pos;
 }
 
-function JS_line_lex(div, substart, lineEnd) {
+function JS_line_lex(div, substart, lineEnd, childIndex) {
     let length = 0;
     let pos = substart;
 
@@ -692,18 +692,32 @@ function JS_line_lex(div, substart, lineEnd) {
                 if (className) {
                     // is done when there IS a valid match.
                     if (length > wordlength) {
-                        let span = document.createElement('span');
+                        let span;
+                        if (false && childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                        }
                         span.innerText = EDITOR_decode_raw(substart, length - wordlength);
                         substart += (length - wordlength);
-                        div.appendChild(span);
                         length = 0;
                     }
                     {
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     span.innerText = EDITOR_decode_raw(substart, wordlength);
                     span.className = className;
                     substart += wordlength;
-                    div.appendChild(span);
                     length = 0;
                     }
                 }
@@ -712,10 +726,17 @@ function JS_line_lex(div, substart, lineEnd) {
                 if (bytes[pos + 1] === js_FORWARDSLASH) {
 
                     if (length > 0) {
-                        let span = document.createElement('span');
+                        let span;
+                        if (false && childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                        }
                         span.innerText = EDITOR_decode_raw(substart, length);
                         substart += length;
-                        div.appendChild(span);
                         length = 0;
                     }
 
@@ -736,11 +757,18 @@ function JS_line_lex(div, substart, lineEnd) {
                     }
 
                     if (length > 0) {
-                        let span = document.createElement('span');
+                        let span;
+                        if (false && childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                        }
                         span.innerText = EDITOR_decode_raw(substart, length);
                         span.className = 'eC';
                         substart += length;
-                        div.appendChild(span);
                         length = 0;
                     }
 
@@ -749,10 +777,17 @@ function JS_line_lex(div, substart, lineEnd) {
                 else if (bytes[pos + 1] === js_ASTERISK) {
                     // write any text that came prior, and on the same line.
                     if (length > 0) {
-                        let span = document.createElement('span');
+                        let span;
+                        if (false && childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                        }
                         span.innerText = EDITOR_decode_raw(substart, length);
                         substart += length;
-                        div.appendChild(span);
                         length = 0;
                     }
 
@@ -789,7 +824,15 @@ function JS_line_lex(div, substart, lineEnd) {
                         }
                     }
 
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     //
                     // The spans are being parentDiv.innerHTML = '' into oblivion maybe take them and push them somewhere cache
                     // for when remaking new line or you keep them and replace innerText and cssclass and only remove spans AFTER redrawing that line?
@@ -797,7 +840,6 @@ function JS_line_lex(div, substart, lineEnd) {
                     span.innerText = EDITOR_decode_raw(substart, length);
                     span.className = 'eCm';
                     substart += length;
-                    div.appendChild(span);
                     length = 0;
 
                     continue;
@@ -807,10 +849,17 @@ function JS_line_lex(div, substart, lineEnd) {
             case js_DOUBLEQUOTE:
                 {
                 if (length > 0) {
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     span.innerText = EDITOR_decode_raw(substart, length);
                     substart += length;
-                    div.appendChild(span);
                     length = 0;
                 }
                 // This code is somewhat a duplication of 'function lex_string(...)'
@@ -838,21 +887,35 @@ function JS_line_lex(div, substart, lineEnd) {
                             break;
                     }
                 }
-                let span = document.createElement('span');
+                let span;
+                if (false && childIndex < div.children.length) {
+                    span = div.children[childIndex++];
+                    span.className = '';
+                }
+                else {
+                    span = document.createElement('span');
+                    div.appendChild(span);
+                }
                 span.innerText = EDITOR_decode_raw(substart, length);
                 span.className = 'eS';
                 substart += length;
-                div.appendChild(span);
                 length = 0;
                 continue;
                 }
             case js_SINGLEQUOTE:
                 {
                 if (length > 0) {
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     span.innerText = EDITOR_decode_raw(substart, length);
                     substart += length;
-                    div.appendChild(span);
                     length = 0;
                 }
                 // This code is somewhat a duplication of 'function lex_string(...)'
@@ -880,21 +943,35 @@ function JS_line_lex(div, substart, lineEnd) {
                             break;
                     }
                 }
-                let span = document.createElement('span');
+                let span;
+                if (false && childIndex < div.children.length) {
+                    span = div.children[childIndex++];
+                    span.className = '';
+                }
+                else {
+                    span = document.createElement('span');
+                    div.appendChild(span);
+                }
                 span.innerText = EDITOR_decode_raw(substart, length);
                 span.className = 'eS';
                 substart += length;
-                div.appendChild(span);
                 length = 0;
                 continue;
                 }
             case js_BACKTICK:
                 {
                 if (length > 0) {
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     span.innerText = EDITOR_decode_raw(substart, length);
                     substart += length;
-                    div.appendChild(span);
                     length = 0;
                 }
                 // This code is somewhat a duplication of 'function lex_string(...)'
@@ -922,11 +999,18 @@ function JS_line_lex(div, substart, lineEnd) {
                             break;
                     }
                 }
-                let span = document.createElement('span');
+                let span;
+                if (false && childIndex < div.children.length) {
+                    span = div.children[childIndex++];
+                    span.className = '';
+                }
+                else {
+                    span = document.createElement('span');
+                    div.appendChild(span);
+                }
                 span.innerText = EDITOR_decode_raw(substart, length);
                 span.className = 'eSm';
                 substart += length;
-                div.appendChild(span);
                 length = 0;
                 continue;
                 }
@@ -935,10 +1019,17 @@ function JS_line_lex(div, substart, lineEnd) {
                 {
                     // write any text that came prior, and on the same line.
                     if (length > 0) {
-                        let span = document.createElement('span');
+                        let span;
+                        if (false && childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                        }
                         span.innerText = EDITOR_decode_raw(substart, length);
                         substart += length;
-                        div.appendChild(span);
                         length = 0;
                     }
                     
@@ -954,11 +1045,18 @@ function JS_line_lex(div, substart, lineEnd) {
                         }
                     }
                     
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     span.innerText = EDITOR_decode_raw(substart, length);
                     span.className = 'eP';
                     substart += length;
-                    div.appendChild(span);
                     length = 0;
 
                     continue;
@@ -967,10 +1065,17 @@ function JS_line_lex(div, substart, lineEnd) {
             	{
                     // write any text that came prior, and on the same line.
                     if (length > 0) {
-                        let span = document.createElement('span');
+                        let span;
+                        if (false && childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                        }
                         span.innerText = EDITOR_decode_raw(substart, length);
                         substart += length;
-                        div.appendChild(span);
                         length = 0;
                     }
                     
@@ -985,11 +1090,18 @@ function JS_line_lex(div, substart, lineEnd) {
                         }
                     }
                     
-                    let span = document.createElement('span');
+                    let span;
+                    if (false && childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                    }
                     span.innerText = EDITOR_decode_raw(substart, length);
                     span.className = 'eM';
                     substart += length;
-                    div.appendChild(span);
                     length = 0;
 
                     continue;
@@ -1000,8 +1112,17 @@ function JS_line_lex(div, substart, lineEnd) {
     }
 
     if (length > 0) {
-        let span = document.createElement('span');
+        let span;
+        if (false && childIndex < div.children.length) {
+            span = div.children[childIndex++];
+            span.className = '';
+        }
+        else {
+            span = document.createElement('span');
+            div.appendChild(span);
+        }
         span.innerText = EDITOR_decode_raw(substart, length);
-        div.appendChild(span);
     }
+
+    return childIndex;
 }
