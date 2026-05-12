@@ -710,7 +710,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     let span;
                     if (childIndex < div.children.length) {
                         span = div.children[childIndex++];
-                        span.className = '';
+                        //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
                         span = document.createElement('span');
@@ -763,7 +763,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         let span;
                         if (childIndex < div.children.length) {
                             span = div.children[childIndex++];
-                            span.className = '';
+                            //span.className = ''; className is guaranteed to be set in this specific case
                         }
                         else {
                             span = document.createElement('span');
@@ -832,7 +832,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     let span;
                     if (childIndex < div.children.length) {
                         span = div.children[childIndex++];
-                        span.className = '';
+                        //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
                         span = document.createElement('span');
@@ -897,7 +897,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                 let span;
                 if (childIndex < div.children.length) {
                     span = div.children[childIndex++];
-                    span.className = '';
+                    //span.className = ''; className is guaranteed to be set in this specific case
                 }
                 else {
                     span = document.createElement('span');
@@ -955,7 +955,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                 let span;
                 if (childIndex < div.children.length) {
                     span = div.children[childIndex++];
-                    span.className = '';
+                    //span.className = ''; className is guaranteed to be set in this specific case
                 }
                 else {
                     span = document.createElement('span');
@@ -1013,7 +1013,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                 let span;
                 if (childIndex < div.children.length) {
                     span = div.children[childIndex++];
-                    span.className = '';
+                    //span.className = ''; className is guaranteed to be set in this specific case
                 }
                 else {
                     span = document.createElement('span');
@@ -1061,7 +1061,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     let span;
                     if (childIndex < div.children.length) {
                         span = div.children[childIndex++];
-                        span.className = '';
+                        //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
                         span = document.createElement('span');
@@ -1108,7 +1108,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     let span;
                     if (childIndex < div.children.length) {
                         span = div.children[childIndex++];
-                        span.className = '';
+                        //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
                         span = document.createElement('span');

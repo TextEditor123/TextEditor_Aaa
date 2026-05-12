@@ -5270,8 +5270,6 @@ function EDITOR_onScroll() {
 function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
 	let childIndex = 0;
 
-    
-
     if (line.start === line.end) {
     	if (childIndex < div.children.length) {
             let span = div.children[childIndex++];
@@ -5329,7 +5327,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                 let span;
                 if (childIndex < div.children.length) {
 					span = div.children[childIndex++];
-                    span.className = '';
+                    //span.className = ''; className is guaranteed to be set in this specific case
 				}
 				else {
 					span = document.createElement('span');
@@ -5340,14 +5338,16 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                 let subend = trackedSyntaxEnd > line.end ? line.end : trackedSyntaxEnd;
                 span.innerText = EDITOR_decode_raw(substart, subend - substart);
                 substart += (subend - substart);
-                if (EDITOR_pooledTrackedSyntax.trackedSyntaxKind === TrackedSyntaxKind.Comment) {
-                    span.className = 'eCM';
-                }
-                else if (EDITOR_pooledTrackedSyntax.trackedSyntaxKind === TrackedSyntaxKind.String) {
-                    span.className = 'eSM';
-                }
-                else {
-                	span.className = '';
+                switch (EDITOR_pooledTrackedSyntax.trackedSyntaxKind) {
+                    case TrackedSyntaxKind.Comment:
+                        span.className = 'eCM';
+                        break;
+                    case TrackedSyntaxKind.String:
+                        span.className = 'eSM';
+                        break;
+                    default:
+                        span.className = '';
+                        break;
                 }
             }
     
