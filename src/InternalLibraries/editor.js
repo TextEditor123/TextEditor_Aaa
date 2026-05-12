@@ -5454,6 +5454,27 @@ function EDITOR_REMOVE_line_drawGutter(linesRemovedCount) {
  * @returns 
  */
 function EDITOR_removeSelection(cursor) {
+
+
+
+
+
+
+	/*
+	"Google AI Overview" for "javascript remove many child elements from html div":
+	3. Simple but Slower: innerHTMLSetting
+	innerHTML to an empty string is easy to write but can be slower because it triggers the browsers HTML parser.
+	Warning: This may not properly clean up event listeners, potentially leading to memory leaks.
+	*/
+
+
+
+
+
+
+
+
+
     if (cursor.editKind != EditKind.None) {
         // TODO: multicursor confusion scenario is likely to happy due to this code, but the code isn't related enough for me to change it yet.
         EDITOR_finalizeEdit(cursor);
