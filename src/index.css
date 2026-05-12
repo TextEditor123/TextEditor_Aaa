@@ -1,0 +1,471 @@
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: var(--primary-background-color);
+  color: var(--primary-foreground-color);
+  color-scheme: var(--color-scheme);
+}
+
+#HEADER {
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-foreground-color);
+  border-bottom: 1px solid var(--primary-border-color);
+  height: var(--header-height);
+}
+
+#BODY {
+  display: flex;
+  /* -1 for header border bottom */
+  height: calc(100% - var(--header-height) - 1px);
+}
+
+#EXPLORER {
+    width: 200px;
+    height: 100%;
+}
+
+.treeView_node {
+  height: var(--APP-line-height);
+  white-space: nowrap;
+}
+
+#FOOTER {
+}
+
+#MENU {
+  position: fixed;
+  min-width: 25px;
+  min-height: 25px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-foreground-color);
+  border: 1px solid var(--primary-border-color);
+  padding-left: 4px;
+  padding-right: 4px;
+  /* the padding-top needs to be accounted for in the js code anywhere calculation of which option was clicked is done, as well any other scenarios that might follow the pattern */
+  padding-top: 4px;
+  padding-bottom: 1px;
+}
+
+  #MENU:focus #MENU_cursor {
+    background-color: var(--primary-active-with-focus-background-color);
+  }
+
+#MENU_cursor {
+  background-color: var(--primary-active-no-focus-background-color);
+  height: var(--APP-line-height);
+  position: absolute;
+  /* -8px is the sum of the padding left and padding right of the menu */
+  width: calc(100% - 8px);
+}
+
+#MENU_optionList {
+  cursor: default;
+  position: relative;
+}
+
+.menuOption {
+  height: var(--APP-line-height);
+  white-space: nowrap;
+}
+
+.LIST {
+  position: relative;
+  overflow: scroll;
+}
+
+  .LIST:focus .LIST_cursor {
+    background-color: var(--primary-active-with-focus-background-color);
+  }
+
+.LIST_virtualization {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+}
+
+.LIST_cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--primary-active-no-focus-background-color);
+  position: absolute;
+  width: 100%;
+}
+
+.LIST_itemList {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.TREEVIEW {
+  position: relative;
+  overflow: scroll;
+  outline: none;
+}
+
+  .TREEVIEW:focus .TREEVIEW_cursor {
+    background-color: var(--primary-active-with-focus-background-color);
+  }
+
+.TREEVIEW_virtualization {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+}
+
+.TREEVIEW_cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--primary-active-no-focus-background-color);
+  position: absolute;
+  width: 100%;
+}
+
+.TREEVIEW_itemList {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.unselectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+
+#WIDGET {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: var(--primary-active-no-focus-background-color);
+    padding: 10px;
+    border: 1px solid var(--primary-border-color);
+}
+
+#EDITOR_hack {
+  width: calc(100% - 200px);
+}
+
+#EDITOR_debug {
+  height: 1.5em;
+  font-family: monospace;
+}
+
+#EDITOR {
+	outline: none;
+  height: calc(100% - 1.5em);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  font-family: monospace;
+  cursor: text;
+  display: flex;
+}
+
+	/*#EDITOR:focus {
+		outline: 1px solid pink;
+	}*/
+
+  /*#EDITOR:focus .EDITOR_cursor {
+    background-color: var(--editor-cursor-color-focused) !important;
+  }*/
+
+/*
+Class names "te..."
+are relating to the text editor UI.
+
+Most particularly renaming is being done to
+the class names that linearly scale in usage as you show more and more text.
+*/
+
+/* .EDITOR_comment is being renamed to .eC (i.e.: Editor Comment) */
+.eC {
+  color: var(--editor-syntax-comment-color);
+}
+
+/* Multiline comment that spans a single line (the 'm' is for 'multiline'. Lowercase lower range of lines being spanned... or something... vs uppercase.) */
+.eCm {
+  color: var(--editor-syntax-comment-color);
+}
+
+/* Multiline comment that spans multiple lines */
+.eCM {
+  color: var(--editor-syntax-comment-color);
+}
+
+/* .EDITOR_string is being renamed to .eS (i.e.: Editor String) */
+.eS {
+  color: var(--editor-syntax-string-color);
+}
+
+/* Backtick deliminated string that spans a single line */
+.eSm {
+  color: var(--editor-syntax-string-color);
+}
+
+/* 3:30 -> 4:30? */
+/* Backtick deliminated string that spans multiple lines */
+.eSM {
+  color: var(--editor-syntax-string-color);
+}
+
+/* .EDITOR_keyword is being renamed to .eK (i.e.: Editor Keyword) */
+.eK {
+  color: var(--editor-syntax-keyword-color);
+}
+
+/* .EDITOR_keywordControl is being renamed to .eKC (i.e.: Editor KeywordControl) */
+.eKC {
+  color: var(--editor-syntax-keywordControl-color);
+}
+
+/* .eP (i.e.: Editor Parenthesis) */
+.eP {
+  color: var(--editor-syntax-parenthesis-color);
+}
+
+/* .eM (i.e.: Editor Member access) */
+.eM {
+  color: var(--editor-syntax-member-access-color);
+}
+
+#EDITOR_virtualizationBoundary {
+  width: 1px;
+  position: absolute;
+}
+
+#EDITOR_findOverlay {
+  /*width: 200px;
+  height: 200px;*/
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 5px;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-foreground-color);
+  border: 1px solid var(--primary-border-color);
+}
+
+#EDITOR_horizontal_scrollbar_sticky {
+  position: sticky;
+  left: 0;
+  top: 0;
+}
+
+#EDITOR_horizontal_scrollbar {
+  position: absolute;
+  overflow-x: scroll;
+  height: 14px;
+  width: 100px;
+  bottom: 0;
+  left: 37.5859px;
+}
+
+#EDITOR_horizontal_scrollbar_virtualization_boundary {
+  height: 1px;
+}
+
+/* can the gutter be used as vertical virtualization boundary? */
+#EDITOR_gutter_container {
+  position: absolute;
+  left: 0;
+  cursor: default;
+  min-height: 100%;
+  background-color: var(--gutter-background-color);
+  text-align: end;
+}
+
+#EDITOR_gutter_sticky {
+  position: sticky;
+  left: 0;
+}
+
+/* .EDITOR_gutterLine is being renamed to .eG (i.e.: Editor Gutter line) */
+.eG {
+  height: var(--EDITOR-line-height);
+}
+
+#EDITOR_body {
+  cursor: text;
+  height: 100%;
+}
+
+#EDITOR_presentation {
+  position: absolute;
+}
+
+#EDITOR_cursorList {
+  position: absolute;
+  width: 100%;
+}
+
+.EDITOR_caretRow {
+  width: 100%;
+  height: var(--EDITOR-line-height);
+  outline: 1px solid var(--light-border-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.EDITOR_cursor {
+  width: 2.5px;
+  height: var(--EDITOR-line-height);
+  background-color: var(--primary-foreground-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#EDITOR_text {
+  white-space: pre;
+  position: absolute;
+  width: 0;
+  height: 0;
+  tab-size: 1;
+}
+
+/* .EDITOR_line is being renamed to .eT (i.e.: Editor Text line) */
+.eT {
+  height: var(--EDITOR-line-height);
+}
+
+.EDITOR_selection {
+    width: 100%;
+    height: var(--EDITOR-line-height);
+    position: absolute;
+    background-color: var(--primary-active-with-focus-background-color);
+}
+
+#DIALOG {
+  position: fixed;
+  width: 60vw;
+  height: 60vh;
+  left: 20vw;
+  top: 20vh;
+  background-color: var(--secondary-background-color);
+  color: var(--secondary-foreground-color);
+  border: 1px solid var(--primary-border-color);
+}
+
+#DIALOG_toolbar {
+  display: flex;
+  justify-content: space-between;
+  height: calc(2 * var(--EDITOR-line-height));
+  border-bottom: 1px solid var(--primary-border-color);
+  background-color: var(--secondary-background-color);
+  position: relative;
+}
+
+#DIALOG_body {
+  /* TODO: -9px is somewhat not understood I think it has to do with the borders but I'm not overly interested in looking into this right now. */
+  height: calc(100% - (2 * var(--EDITOR-line-height)) - 9px);
+  background-color: var(--secondary-background-color);
+  position: relative;
+}
+
+#DIALOG_resize {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+}
+
+#DIALOG_FindAll_searchResultsDiv {
+  overflow: scroll;
+  height: calc(100% - (2 * var(--APP-line-height)) - 2px);
+}
+
+.FINDALL_lineHeight {
+  height: var(--APP-line-height);
+}
+
+:root {
+  --header-height: 25px;
+  --EDITOR-line-height: 20px;
+  --APP-line-height: 20px;
+}
+
+button:focus {
+	/*
+	When programmatically focusing a button with javascript,
+	the outline does not necessarily appear due to user-agent heuristics that determine whether the outline should appear.
+	
+	But, setting an outline yourself causes the outline to always appear regardless of the heuristics.
+	
+	This is important because some keyboard input moves focus to another "section" of app,
+	and leverages "known to exist" button elements as places to put the user's focus to.
+	
+	But without this, the user doesn't have any feedback for where their focus went (given my user-agent's heuristics, this was my experience).
+	*/
+	outline: 3px solid var(--primary-focus-outline);
+}
+
+input:focus {
+	outline: 3px solid var(--primary-focus-outline);
+}
+
+select:focus {
+  outline: 3px solid var(--primary-focus-outline);
+}
+
+/*
+propertyName: rgb(120, 200, 210)
+types: rgb(70, 165, 215)
+locals: rgb(170, 150, 215)
+functions: rgb(85, 193, 85)
+*/
+
+.dark-theme {
+  --primary-background-color: rgb(30, 30, 30);
+  --primary-foreground-color: rgb(185, 185, 185);
+  --secondary-background-color: rgb(38, 38, 40);
+  --secondary-foreground-color: rgb(212, 212, 212);
+  --primary-border-color: rgb(212, 212, 212);
+  --light-border-color: rgb(126, 126, 126);
+  --color-scheme: dark;
+  --primary-active-with-focus-background-color: rgb(22, 71, 104);
+  --primary-active-no-focus-background-color: rgb(65, 65, 65);
+  --primary-focus-outline: rgb(185, 185, 185);
+  --gap-buffer-span-color: rgb(244, 135, 0);
+  --gutter-background-color: rgb(30, 45, 45);
+  --editor-syntax-comment-color: rgb(90 151 90);
+  --editor-syntax-string-color: rgb(180, 180, 60);
+  --editor-syntax-keyword-color: rgb(215, 150, 70);
+  --editor-syntax-keywordControl-color: rgb(215, 100, 100);
+  --editor-syntax-parenthesis-color: rgb(173 90 255);
+  --editor-syntax-member-access-color: rgb(0 180 255);
+  --editor-cursor-color-focused: rgb(6, 138, 255);
+}
+
+.light-theme {
+  --primary-background-color: white;
+  --primary-foreground-color: black;
+  --secondary-background-color: rgb(255, 246, 220);
+  --secondary-foreground-color: black;
+  --primary-border-color: black;
+  --light-border-color: rgb(126, 126, 126);
+  --color-scheme: light;
+  --primary-active-with-focus-background-color: #98d6f1;
+  --primary-active-no-focus-background-color: rgb(220, 220, 220);
+  --primary-focus-outline: black;
+  --gap-buffer-span-color: rgb(242, 92, 0);
+  --gutter-background-color: rgb(255, 246, 220);
+  --editor-syntax-comment-color: rgb(238, 0, 255);
+  --editor-syntax-string-color: rgb(255, 119, 0);
+  --editor-syntax-keyword-color: rgb(255, 0, 0);
+  --editor-syntax-keywordControl-color: rgb(215, 100, 100);
+  --editor-syntax-parenthesis-color: rgb(85, 193, 85);
+  --editor-syntax-member-access-color: rgb(70, 165, 215);
+  --editor-cursor-color-focused: rgb(0, 0, 255);
+}

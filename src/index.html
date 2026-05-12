@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body id="ROOT" class="dark-theme">
+
+    <div id="HEADER">
+      <button id="HEADER_buttonSettings">Settings</button>
+      |
+      <input type='checkbox' id='HEADER_toggleShowExplorer' checked/>
+      <label for='HEADER_toggleShowExplorer'>ShowExplorer</label>
+      |
+      <span id="EXPLORER_folderOrWorkspaceButtons">
+          Pick:
+          <button id="EXPLORER_pickFolder">Folder</button>
+          or
+          <button id="EXPLORER_pickWorkspace">Workspace</button>
+      </span>
+      |
+      <button id="EDITOR_gotoF">
+        <!-- Use select to provide more meaning of what this UI does? -->
+        Goto F
+      </button>
+      <!--
+      4 scenarios:
+      - chose neither
+      - chose folder
+          - CHANGE_EXPLORER_pickFolderInnerTextToChosenFolderFileName
+              - (passive) has NOT decided to add another folder thus creating a workspace
+          - has decided to add another folder thus creating a workspace
+              - (button) ...
+                  - (active) CHANGE_EXPLORER_pickFolderInnerTextToChosenFolderFileName
+          - this button is choose folder until transition to a workspace
+      - chose workspace
+          - 
+      - clear workspace? vscode says "close workspace"
+      - create workspace
+
+      - has not yet chosen
+          - Pick: <Folder> or <Workspace>
+      
+      - chose folder
+          - <ChosenFolderDisplayName> | Workspace: <ConvertToWorkspace> or <OpenWorkspaceFromFile>
+
+      - chose folder + <ConvertToWorkspace>
+          - <OpenFolder> | Workspace: <AddFolderToWorkspace> or <OpenWorkspaceFromFile> or <CloseWorkspace> or <SaveWorkspaceAs>
+          - 
+
+      - If is "workspace" color the word workspace with a "more emphasized color" than the word "folder" or vice versa.
+
+      - Long term this probably won't stay this way it sounds like a LOT of buttons. But just do it and then move them after to something more sensible.
+
+
+      --------
+
+      The very next step prior to all those buttons is to have the Pick: ... | Workspace button:
+      - open file
+      - parse as json
+      - find top level "folders" property is array of object
+          - each object has
+              - property "path"
+
+      Maybe don't show choose folder when have workspace it is confusing that you might add to workspace perhaps then clobber it all with a single folder being opened
+      Then when u close the workspace u get the button to choose folder back.
+      -->
+    </div>
+
+    <div id="BODY">
+      <!-- TODO: "Move" the tab index to the "TreeViewComponent"? -->
+      <div id="EXPLORER">
+      </div>
+      <div id="EDITOR_hack">
+        <!-- See #EDITOR_debug for #EDITOR_hack explanation -->
+        
+        <!--
+        These are in the wrong order for "z axis" of like what it ontop of one another
+        you get this weird low opacity see through effect currently
+        but I have no idea what I'm doing
+        and I have 0 energy to do anything and I can't bear to think about this
+        right now but I'm aware.
+        -->
+        
+        <div id="EDITOR" class="unselectable" tabindex="0">
+          <div id="EDITOR_virtualizationBoundary"></div>
+          <div id="EDITOR_horizontal_scrollbar_sticky">
+            <div id="EDITOR_horizontal_scrollbar">
+              <div id="EDITOR_horizontal_scrollbar_virtualization_boundary"></div>
+            </div>
+          </div>
+          <div id="EDITOR_gutter_sticky">
+            <div id="EDITOR_gutter_container"></div>
+          </div>
+          <div id="EDITOR_body">
+            <div id="EDITOR_presentation"></div>
+            <div id="EDITOR_cursorList"></div>
+            <div id="EDITOR_text"></div>
+          </div>
+        </div>
+        <div id="EDITOR_findOverlay" style="visibility: hidden;"></div>
+        <div id="EDITOR_debug">
+          <!--
+          Not having this as a child to the #EDITOR is annoying,
+          but I'd have to change around a good bit of code to make that work due to virtualization and possibly further etc...
+          -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO: Menu submenus -->
+
+    <div id="DIALOG" style="visibility: hidden;">
+    </div>
+
+    <div id="MENU" class="unselectable" tabindex="0">
+        <div id="MENU_virtualizationBoundary"></div>
+        <div id="MENU_cursor"></div>
+        <div id="MENU_optionList"></div>
+    </div>
+
+    <div id="WIDGET">
+    </div>
+
+    <script src="./InternalLibraries/widget.js"></script>
+    <script src="./InternalLibraries/menu.js"></script>
+    <script src="./InternalLibraries/dialog.js"></script>
+    <script src="./InternalLibraries/list.js"></script>
+    <script src="./InternalLibraries/treeView.js"></script>
+    <script src="./InternalLibraries/editor.js"></script>
+    <script src="./InternalLibraries/javascriptFeatures.js"></script>
+    <script src="./InternalLibraries/explorer.js"></script>
+    <script src="my.js"></script>
+  </body>
+</html>
