@@ -31,11 +31,12 @@ class TreeViewComponent {
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
         this.cursorIndex = 0;
 
-        this.throttleScroll = this.construct_throttle_scroll(this.event_scroll_async, 100, { leading: true, trailing: true });
-
         this._ONSCROLLscrollTop = 0;
         this._ONSCROLLvirtualIndex = 0;
         this._ONSCROLLvirtualCount = 0;
+        
+        this.event_scroll_async_timer = null;
+        this.event_scroll_async_bool = null;
     }
 
     /**
@@ -98,7 +99,7 @@ class TreeViewComponent {
     draw_addEvents() {
         this.rootElement.addEventListener('click', this.event_click.bind(this));
         this.rootElement.addEventListener('keydown', this.event_keydown.bind(this));
-        this.rootElement.addEventListener('scroll', this.throttleScroll.bind(this));
+        this.rootElement.addEventListener('scroll', this.event_scroll_async_WRAPIT.bind(this));
         this.rootElement.addEventListener('dblclick', this.event_dblclick.bind(this));
         this.rootElement.addEventListener('contextmenu', this.event_contextmenu.bind(this));
         window.addEventListener('resize', this.event_windowResize.bind(this));
@@ -107,7 +108,7 @@ class TreeViewComponent {
     draw_removeEvents() {
         this.rootElement.removeEventListener('click', this.event_click.bind(this));
         this.rootElement.removeEventListener('keydown', this.event_keydown.bind(this));
-        this.rootElement.removeEventListener('scroll', this.throttleScroll.bind(this));
+        this.rootElement.removeEventListener('scroll', this.event_scroll_async_WRAPIT.bind(this));
         this.rootElement.addEventListener('dblclick', this.event_dblclick.bind(this));
         this.rootElement.addEventListener('contextmenu', this.event_contextmenu.bind(this));
         window.removeEventListener('resize', this.event_windowResize.bind(this));
@@ -391,6 +392,25 @@ class TreeViewComponent {
         this.boundingClientRect = null;
     }
 
+    async event_scroll_async_WRAPIT() {
+        const timeoutFunc = async () => {
+	        if (/*trailing && lastArgs*/ this.event_scroll_async_bool) {
+	            await this.event_scroll_async();
+	            this.event_scroll_async_bool = false;
+	            this.event_scroll_async_timer = setTimeout(timeoutFunc, 100);
+	        } else {
+	            this.event_scroll_async_timer = null;
+	        }
+	    };
+	
+		this.event_scroll_async_bool = true;
+		
+	    if (!this.event_scroll_async_timer) {
+	    	await this.event_scroll_async();
+	        this.event_scroll_async_timer = setTimeout(timeoutFunc, 100);
+	    }
+    }
+
     async event_scroll_async() {
         await this.draw_render_async();
     }
@@ -440,42 +460,5 @@ class TreeViewComponent {
             index = 0;
         }
         return index;
-    }
-
-    // TODO: I need to better understand how to use "multiple of these" instead of copying and pasting the code everywhere
-    //
-    // TODO: async version?
-    //
-    // Google AI overview for "javascript throttle trailing edge" generated this code:
-    construct_throttle_scroll(func, wait, options = { leading: false, trailing: true }) {
-        let timer = null;
-        let lastArgs;
-        let context;
-
-        this.restoreThrottle_scroll = () => {
-            timer = null;
-        };
-
-        const timeoutFunc = async () => {
-            if (options.trailing && lastArgs) {
-                await func.apply(context, lastArgs);
-                lastArgs = null;
-                timer = setTimeout(timeoutFunc, wait);
-            } else {
-                timer = null;
-            }
-        };
-
-        return async function (...args) {
-            context = this;
-            lastArgs = args;
-
-            if (!timer) {
-                if (options.leading) {
-                    await func.apply(context, args);
-                }
-                timer = setTimeout(timeoutFunc, wait);
-            }
-        };
     }
 }
