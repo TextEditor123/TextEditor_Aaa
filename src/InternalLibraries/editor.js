@@ -921,14 +921,6 @@ EDITOR_cursorListElement.appendChild(EDITOR_primaryCursor.caretRow);
  */
 let EDITOR_cursorList = [EDITOR_primaryCursor];
 
-let EDITOR_throttleResize = (...args) => {};
-
-/*
-If an exception occurs, you need to set the throttle timer to null,
-otherwise no further events will ever run, because it was left in a bad state.
-*/
-let EDITOR_restoreThrottle_resize = () => {};
-
 let EDITOR_isSourceOfLeftMouseButton = false;
 
 let EDITOR_detailRank = 0;
@@ -3821,8 +3813,7 @@ function EDITOR_registerHandlers() {
         }
     });
 
-    EDITOR_throttleResize = EDITOR_throttle_resize(EDITOR_onResize, 200, { leading: false, trailing: true });
-    window.addEventListener('resize', EDITOR_throttleResize.bind(this));
+    window.addEventListener('resize', EDITOR_onResize_WRAPIT.bind(this));
 
     // TODO: Are arrow functions an allocation and if so are they short lived, cached, etc...?
     EDITOR_horizontal_scrollbar.addEventListener('scroll', () => {
@@ -5080,6 +5071,27 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
         EDITOR_textElement.innerHTML = '';
         EDITOR_drawViewPort();
         EDITOR_drawHorizontalScrollbar();
+    }
+}
+
+let EDITOR_onResize_timer = null;
+let EDITOR_onResize_bool = null;
+
+function EDITOR_onResize_WRAPIT() {
+    const timeoutFunc = () => {
+        if (/*trailing && lastArgs*/ EDITOR_onResize_bool) {
+            EDITOR_onResize();
+            EDITOR_onResize_bool = false;
+            EDITOR_onResize_timer = setTimeout(timeoutFunc, 200);
+        } else {
+            EDITOR_onResize_timer = null;
+        }
+    };
+
+	EDITOR_onResize_bool = true;
+	
+    if (!EDITOR_onResize_timer) {
+        EDITOR_onResize_timer = setTimeout(timeoutFunc, 200);
     }
 }
 
@@ -7817,39 +7829,4 @@ function EDITOR_decode_experimental_gapBuffer(gapBuffer, start, length) {
 	
 	
 	return EDITOR_decode_pooled_stringBuilder_array.join('');
-}
-
-// TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
-//
-// Google AI overview for "javascript throttle trailing edge" generated this code:
-function EDITOR_throttle_resize(func, wait, options = { leading: false, trailing: true }) {
-    let timer = null;
-    let lastArgs;
-    let context;
-
-    EDITOR_restoreThrottle_resize = () => {
-        timer = null;
-    };
-
-    const timeoutFunc = () => {
-        if (options.trailing && lastArgs) {
-            func.apply(context, lastArgs);
-            lastArgs = null;
-            timer = setTimeout(timeoutFunc, wait);
-        } else {
-            timer = null;
-        }
-    };
-
-    return function (...args) {
-        context = this;
-        lastArgs = args;
-
-        if (!timer) {
-            if (options.leading) {
-                func.apply(context, args);
-            }
-            timer = setTimeout(timeoutFunc, wait);
-        }
-    };
 }
