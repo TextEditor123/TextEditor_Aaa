@@ -3297,6 +3297,7 @@ function EDITOR_editEvent(editKind, event) {
                 EDITOR_EnterKey(cursor, event.ctrlKey, event.shiftKey);
                 EDITOR_drawCursor(cursor);
             }
+            break;
         default:
             throw new Error(`The EditKind:${editKind} was not recognized.`);
             break;
