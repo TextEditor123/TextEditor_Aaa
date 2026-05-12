@@ -51,8 +51,6 @@ class ListComponent {
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
         this.cursorIndex = 0;
 
-        this.throttleScroll = this.construct_throttle_scroll(this.event_scroll, 100, { leading: true, trailing: true });
-
         /**
          * This relates to how many extra items will be rendered beyond what naively would fit at an equal scrollTop down to filling the viewport height.
          * 
@@ -63,6 +61,9 @@ class ListComponent {
         this._ONSCROLLscrollTop = 0;
         this._ONSCROLLvirtualIndex = 0;
         this._ONSCROLLvirtualCount = 0;
+        
+        this.event_scroll_timer = null;
+        this.event_scroll_bool = false;
 
         /**
          * It could be useful to inherit HTML element due to storage, you'd have to hold a null reference that you can set
@@ -142,14 +143,14 @@ class ListComponent {
     draw_addEvents() {
         this.rootElement.addEventListener('click', this.event_click.bind(this));
         this.rootElement.addEventListener('keydown', this.event_keydown.bind(this));
-        this.rootElement.addEventListener('scroll', this.throttleScroll.bind(this));
+        this.rootElement.addEventListener('scroll', this.event_scroll_WRAPIT.bind(this));
         window.addEventListener('resize', this.event_windowResize.bind(this));
     }
     
     draw_removeEvents() {
         this.rootElement.removeEventListener('click', this.event_click.bind(this));
         this.rootElement.removeEventListener('keydown', this.event_keydown.bind(this));
-        this.rootElement.removeEventListener('scroll', this.throttleScroll.bind(this));
+        this.rootElement.removeEventListener('scroll', this.event_scroll_WRAPIT.bind(this));
         window.removeEventListener('resize', this.event_windowResize.bind(this));
     }
 
@@ -389,6 +390,25 @@ class ListComponent {
         this.boundingClientRect = null;
     }
     
+    event_scroll_WRAPIT() {
+        const timeoutFunc = () => {
+	        if (/*trailing && lastArgs*/ this.event_scroll_bool) {
+	            this.event_scroll();
+	            this.event_scroll_bool = false;
+	            this.event_scroll_timer = setTimeout(timeoutFunc, 100);
+	        } else {
+	            this.event_scroll_timer = null;
+	        }
+	    };
+	
+		this.event_scroll_bool = true;
+		
+	    if (!this.event_scroll_timer) {
+	    	this.event_scroll();
+	        this.event_scroll_timer = setTimeout(timeoutFunc, 100);
+	    }
+    }
+    
     event_scroll() {
         this.draw_render();
     }
@@ -439,41 +459,6 @@ class ListComponent {
             index = 0;
         }
         return index;
-    }
-
-    // TODO: I need to better understand how to use "multiple of these" instead of copying and pasting the code everywhere
-    //
-    // Google AI overview for "javascript throttle trailing edge" generated this code:
-    construct_throttle_scroll(func, wait, options = { leading: false, trailing: true }) {
-        let timer = null;
-        let lastArgs;
-        let context;
-
-        this.restoreThrottle_scroll = () => {
-            timer = null;
-        };
-
-        const timeoutFunc = () => {
-            if (options.trailing && lastArgs) {
-                func.apply(context, lastArgs);
-                lastArgs = null;
-                timer = setTimeout(timeoutFunc, wait);
-            } else {
-                timer = null;
-            }
-        };
-
-        return function (...args) {
-            context = this;
-            lastArgs = args;
-
-            if (!timer) {
-                if (options.leading) {
-                    func.apply(context, args);
-                }
-                timer = setTimeout(timeoutFunc, wait);
-            }
-        };
     }
 }
 
