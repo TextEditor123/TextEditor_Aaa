@@ -31,7 +31,11 @@ It's always the same task every day no matter what your goal is:
 That's the bare minimum.
 And if you meet that bare minimum, you ought to not feel anymore anxiety for the day.
 
+============
 
+Honestly idk what's wrong with you. You didn't do anything but it isn't bad progress
+and yet all in all I feel horrible.
+But... you never emptied the innerHTML. So your change is doing nothing yet.
 
 
 
