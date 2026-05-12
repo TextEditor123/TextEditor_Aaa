@@ -5271,7 +5271,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
 	let childIndex = 0;
     if (line.start === line.end) {
     	if (childIndex < div.children.length) {
-			div[childIndex++].innerText = '';
+			div.children[childIndex++].innerText = '';
 		}
 		else {
 			div.appendChild(document.createElement('span'));
@@ -5304,26 +5304,27 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                 else {
                     let span;
                     if (childIndex < div.children.length) {
-						span = div[childIndex++];
+						span = div.children[childIndex++];
 					}
 					else {
 						span = document.createElement('span');
+                        div.appendChild(span);
 					}
                     
                     let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
                     span.innerText = EDITOR_decode_raw(substart, subend - substart);
                     substart += (subend - substart);
-                    div.appendChild(span);
                 }
             }
     
             {
                 let span;
                 if (childIndex < div.children.length) {
-					span = div[childIndex++];
+					span = div.children[childIndex++];
 				}
 				else {
 					span = document.createElement('span');
+                    div.appendChild(span);
 				}
                 let trackedSyntaxEnd = EDITOR_pooledTrackedSyntax.start + EDITOR_pooledTrackedSyntax.length;
                 let subend = trackedSyntaxEnd > line.end ? line.end : trackedSyntaxEnd;
@@ -5338,7 +5339,6 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                 else {
                 	// span.className = '';
                 }
-                div.appendChild(span);
             }
     
             if (EDITOR_pooledTrackedSyntax.start + EDITOR_pooledTrackedSyntax.length <= line.end) {
@@ -5356,13 +5356,13 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
             else {
                 let span;
                 if (childIndex < div.children.length) {
-					span = div[childIndex++];
+					span = div.children[childIndex++];
 				}
 				else {
 					span = document.createElement('span');
+                    div.appendChild(span);
 				}
                 span.innerText = EDITOR_decode_raw(substart, line.end - substart);
-                div.appendChild(span);
             }
         }
     }
