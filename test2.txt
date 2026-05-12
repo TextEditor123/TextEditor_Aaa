@@ -39,7 +39,12 @@ But... you never emptied the innerHTML. So your change is doing nothing yet.
 
 ugh you never removed the code that emptied the innerHTML... is what I mean to say...
 
+============
 
+I think I broke a ton of code I can't scroll all the text disappears lol
+Just the sheer amount of "ugh" and "omg" that I've been feeling
+and then I break all the code it kinda was comical timing in a way.
+I'm gonna fix it rq.
 
 
 
