@@ -1916,9 +1916,33 @@ function EDITOR_measureLineHeightAndCharacterWidth() {
     EDITOR_textElement.removeChild(measureElement);
 }
 
-function EDITOR_wrapOnMouseMove(event) {
-    if (event.buttons & 1 && EDITOR_isSourceOfLeftMouseButton) {
-        EDITOR_throttleMousemove(event);
+let EDITOR_onMouseMove_timer = null;
+let EDITOR_onMouseMove_event = null;
+
+// TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
+//
+// Google AI overview for "javascript throttle trailing edge" generated this code:
+function EDITOR_onMouseMove_WRAPIT(event) {
+
+	const timeoutFunc = () => {
+        if (/*trailing && lastArgs*/ EDITOR_onMouseMove_event) {
+            EDITOR_onMouseMove(EDITOR_onMouseMove_event);
+            EDITOR_onMouseMove_event = null;
+            EDITOR_onMouseMove_timer = setTimeout(timeoutFunc, 90);
+        } else {
+            EDITOR_onMouseMove_timer = null;
+        }
+    };
+
+	if (event.buttons & 1 && EDITOR_isSourceOfLeftMouseButton) {
+		EDITOR_onMouseMove_event = event;
+		
+	    if (!EDITOR_onMouseMove_timer) {
+	        if (true /*options.leading*/) {
+	            EDITOR_onMouseMove(event);
+	        }
+	        EDITOR_onMouseMove_timer = setTimeout(timeoutFunc, 90);
+	    }
     }
     else {
         EDITOR_isSourceOfLeftMouseButton = false;
@@ -3771,12 +3795,7 @@ function EDITOR_registerHandlers() {
         }
     });
 
-    // Google AI overview for "javascript throttle trailing edge" generated the 'throttle(...)' function
-    // ... I then asked how to invoke it and it gave me this:
-    //
-    // Using vanilla JS throttle with trailing edge support
-    EDITOR_throttleMousemove = EDITOR_throttle_mouseMove(EDITOR_onMouseMove, 90, { leading: true, trailing: true });
-    EDITOR_baseElement.addEventListener('mousemove', EDITOR_wrapOnMouseMove.bind(this));
+    EDITOR_baseElement.addEventListener('mousemove', EDITOR_onMouseMove_WRAPIT.bind(this));
 
     EDITOR_baseElement.addEventListener('scroll', EDITOR_onScroll_WRAPIT.bind(this));
 
@@ -5101,12 +5120,6 @@ let EDITOR_ONSCROLLscrollTop = -1;
 let EDITOR_timer = null;
 let EDITOR_onScroll_bool = false;
 
-/**
- * TODO: remove this perceived-to-be-outdated TODO:
- *     TODO: determine what line indices are already being displayed and then move things around
- * 
- * TODO: Too many verbose comments that are just ramblings
- */
 function EDITOR_onScroll_WRAPIT() {
 	const timeoutFunc = () => {
         if (/*trailing && lastArgs*/ EDITOR_onScroll_bool) {
@@ -5127,6 +5140,13 @@ function EDITOR_onScroll_WRAPIT() {
         EDITOR_timer = setTimeout(timeoutFunc, 100);
     }
 }
+
+/**
+ * TODO: remove this perceived-to-be-outdated TODO:
+ *     TODO: determine what line indices are already being displayed and then move things around
+ * 
+ * TODO: Too many verbose comments that are just ramblings
+ */
 function EDITOR_onScroll() {
 	EDITOR_finalizeAllCursors();
     update_VirtualLineIndex();
@@ -7800,41 +7820,6 @@ function EDITOR_decode_experimental_gapBuffer(gapBuffer, start, length) {
 	
 	
 	return EDITOR_decode_pooled_stringBuilder_array.join('');
-}
-
-// TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
-//
-// Google AI overview for "javascript throttle trailing edge" generated this code:
-function EDITOR_throttle_mouseMove(func, wait, options = { leading: false, trailing: true }) {
-    let timer = null;
-    let lastArgs;
-    let context;
-
-    EDITOR_restoreThrottle_mouseMove = () => {
-        timer = null;
-    };
-
-    const timeoutFunc = () => {
-        if (options.trailing && lastArgs) {
-            func.apply(context, lastArgs);
-            lastArgs = null;
-            timer = setTimeout(timeoutFunc, wait);
-        } else {
-            timer = null;
-        }
-    };
-
-    return function (...args) {
-        context = this;
-        lastArgs = args;
-
-        if (!timer) {
-            if (options.leading) {
-                func.apply(context, args);
-            }
-            timer = setTimeout(timeoutFunc, wait);
-        }
-    };
 }
 
 // TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
