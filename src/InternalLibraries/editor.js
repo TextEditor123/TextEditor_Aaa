@@ -6328,7 +6328,10 @@ const CharacterKind = {
 }
 
 async function EDITOR_MenuOnClick(indexClicked, elementClicked) {
-    const commandKind = elementClicked.dataset.commandKind;
+    const commandKind = parseInt(elementClicked.dataset.commandKind, 10);
+    if (!commandKind) {
+        return;
+    }
 
     switch (commandKind) {
         case CommandKind.Cut:

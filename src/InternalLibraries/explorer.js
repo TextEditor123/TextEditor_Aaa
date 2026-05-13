@@ -471,7 +471,10 @@ async function EXPLORER_openInEditor(absolutePath, shouldFocus) {
 }
 
 async function EXPLORER_MenuOnClick(indexClicked, elementClicked) {
-    const commandKind = elementClicked.dataset.commandKind;
+    const commandKind = parseInt(elementClicked.dataset.commandKind, 10);
+    if (!commandKind) {
+        return;
+    }
 
     if (commandKind !== CommandKind.Cut & commandKind !== CommandKind.Paste) {
         EXPLORER_menuOptionCut_object = null;
