@@ -2058,7 +2058,4 @@ but it emphasizes the idea that you gotta just get started
 because your mood at the start isn't necessarily going to be your mood the entire session).
 
 =========
-
-Stop typing random comments, and stop making playlists on youtube; it's weird
-
 */
