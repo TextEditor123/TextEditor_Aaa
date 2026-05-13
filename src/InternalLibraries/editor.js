@@ -1031,6 +1031,8 @@ let EDITOR_ONSCROLLscrollTop = -1;
 let EDITOR_timer = null;
 let EDITOR_onScroll_bool = false;
 
+let EDITOR_decode_pooled_stringBuilder_array = [];
+
 /**
  * @param {*} indexLine
  * @returns {number} the last valid POSITION index on the line, but with respect to any pending edits.
@@ -6382,8 +6384,6 @@ function EDITOR_moveCursor_lineIndex_columnIndex(indexLine, indexColumn) {
     EDITOR_primaryCursor.selectionAnchor = EDITOR_primaryCursor.selectionEnd;
     EDITOR_drawCursor(EDITOR_primaryCursor);
 }
-
-let EDITOR_decode_pooled_stringBuilder_array = [];
 
 /**
  * Tabs are stored as '\t\0\0\0', all line feeds converted to '\n'.

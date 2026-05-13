@@ -2062,19 +2062,6 @@ because your mood at the start isn't necessarily going to be your mood the entir
 
 =========
 
-I constantly feel like I don't want to do this anymore.
-I want to just play videogames is all I can think while I'm sitting here and I spend hours just sitting here with the code
-open and I'm staring at it and I'm getting NOTHING done. It is so frustrating.
 
-I literally have had the code open this entire time and I've done nothing.
-
-I don't want to play videogames actually.
-It is just that my brain is completely zeroing out on me.
-And the videogames are more quick to take advantage of my brain to make me feel like continuing engaging with them.
-
-What I want to do is write some code and make progress.
-
-I imagine a cartoon in my head. Where my cartoonified brain is a representation of me.
-And I like take a stick and poke it and say "do it do something" and I just sit here visualizing that for hours on end.
 
 */
