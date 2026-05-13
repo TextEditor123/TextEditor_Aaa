@@ -412,6 +412,10 @@ class TreeViewComponent {
         }
     }
 
+	/**
+	 * TODO: this should probably return the invocation rather than awaiting?...
+	 * ...but take care to consider whether any oddities will occur with setTimeout and async whether you've awaited here or not.
+	*/
     async event_scroll_async() {
         await this.draw_render_async();
     }
