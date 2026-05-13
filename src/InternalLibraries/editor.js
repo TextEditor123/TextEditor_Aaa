@@ -1167,6 +1167,7 @@ function EDITOR_setText(text, fileStartsWithBom, textSourceIdentifier, FORMATTED
     EDITOR_textSourceIdentifier = textSourceIdentifier;
     EDITOR_FORMATTED_textSourceIdentifier = FORMATTED_textSourceIdentifier;
     EDITOR_extensionKind = extensionKind;
+    EDITOR_language_line_lex_SET(EDITOR_extensionKind);
     EDITOR_lineEndString = lineEndString;
 
     // When doing a "full reset" it is easier to just add EOF at the end.
@@ -5368,33 +5369,36 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
             }
     
             if (EDITOR_pooledTrackedSyntax.start > substart) {
-                switch (EDITOR_extensionKind) {
-                    case ExtensionKind.JavaScript:
-                    {
-                        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
-                        childIndex = JS_line_lex(div, substart, subend, childIndex);
-                        substart += (subend - substart);
-                        break;
-                    }
-                    default:
-                    {
-                        let span;
-                        if (childIndex < div.children.length) {
-                            span = div.children[childIndex++];
-                            span.className = '';
-                        }
-                        else {
-                            span = document.createElement('span');
-                            div.appendChild(span);
-                            childIndex++;
-                        }
-                        
-                        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
-                        span.innerText = EDITOR_decode_raw(substart, subend - substart);
-                        substart += (subend - substart);
-                        break;
-                    }
-                }
+                let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
+                childIndex = EDITOR_language_line_lex(div, substart, subend, childIndex);
+                substart += (subend - substart);
+                //switch (EDITOR_extensionKind) {
+                //    case ExtensionKind.JavaScript:
+                //    {
+                //        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
+                //        childIndex = JS_line_lex(div, substart, subend, childIndex);
+                //        substart += (subend - substart);
+                //        break;
+                //    }
+                //    default:
+                //    {
+                //        let span;
+                //        if (childIndex < div.children.length) {
+                //            span = div.children[childIndex++];
+                //            span.className = '';
+                //        }
+                //        else {
+                //            span = document.createElement('span');
+                //            div.appendChild(span);
+                //            childIndex++;
+                //        }
+                //        
+                //        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
+                //        span.innerText = EDITOR_decode_raw(substart, subend - substart);
+                //        substart += (subend - substart);
+                //        break;
+                //    }
+                //}
             }
     
             {
@@ -5434,24 +5438,25 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
         }
     
         if (substart < line.end) {
-            switch (EDITOR_extensionKind) {
-                case ExtensionKind.JavaScript:
-                    childIndex = JS_line_lex(div, substart, line.end, childIndex);
-                    break;
-                default:
-                    let span;
-                    if (childIndex < div.children.length) {
-                        span = div.children[childIndex++];
-                        span.className = '';
-                    }
-                    else {
-                        span = document.createElement('span');
-                        div.appendChild(span);
-                        childIndex++;
-                    }
-                    span.innerText = EDITOR_decode_raw(substart, line.end - substart);
-                    break;
-            }
+            childIndex = EDITOR_language_line_lex(div, substart, line.end, childIndex);
+            //switch (EDITOR_extensionKind) {
+            //    case ExtensionKind.JavaScript:
+            //        childIndex = JS_line_lex(div, substart, line.end, childIndex);
+            //        break;
+            //    default:
+            //        let span;
+            //        if (childIndex < div.children.length) {
+            //            span = div.children[childIndex++];
+            //            span.className = '';
+            //        }
+            //        else {
+            //            span = document.createElement('span');
+            //            div.appendChild(span);
+            //            childIndex++;
+            //        }
+            //        span.innerText = EDITOR_decode_raw(substart, line.end - substart);
+            //        break;
+            //}
         }
     }
 
@@ -7867,4 +7872,46 @@ function EDITOR_toExtensionKind(extensionWithPeriod) {
         default:
             return ExtensionKind.None;
     }
+}
+
+function EDITOR_language_line_lex_SET(extensionKind) {
+    switch (extensionKind) {
+        case ExtensionKind.JavaScript:
+            EDITOR_language_line_lex = JS_line_lex;
+            break;
+        default:
+            EDITOR_language_line_lex = PLAINTEXT_line_lex;
+            break;
+    }
+}
+
+/**
+ * TODO: this can be way faster all I did was take JS_line_lex and then strip away all the details 
+ */
+function PLAINTEXT_line_lex(div, substart, lineEnd, childIndex) {
+    let length = 0;
+    let pos = substart;
+
+    let bytes = EDITOR_textByteList.bytes;
+
+    while (pos < lineEnd) {
+        length++;
+        pos++;
+    }
+
+    if (length > 0) {
+        let span;
+        if (childIndex < div.children.length) {
+            span = div.children[childIndex++];
+            span.className = '';
+        }
+        else {
+            span = document.createElement('span');
+            div.appendChild(span);
+            childIndex++;
+        }
+        span.innerText = EDITOR_decode_raw(substart, length);
+    }
+
+    return childIndex;
 }
