@@ -1904,6 +1904,11 @@ function hasBOM(filePath) {
 sec0*/
 
 /*
-When you cache the bounding client rect, what properties do you actually end up using
-and would it be meaningful to instead store those individual properties instead.
+- [ ] When you cache the bounding client rect, what properties do you actually end up using
+    and would it be meaningful to instead store those individual properties instead.
+    
+- [ ] Type a new multi-line comment, then make it span multiple lines, its syntax highlighting doesn't work unless you re-open the file.
+
+- [ ] What is the cost of document.getElementById(...)
+    - [ ] Should a non-zero amount of scenarios where you cache this be changed to instead invoke the method to get the reference when needed.
 */
