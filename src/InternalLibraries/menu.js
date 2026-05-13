@@ -7,19 +7,19 @@ let MENU_cursorIndex = 0;
 const MENU_optionListElement = document.getElementById('MENU_optionList');
 
 const CommandKind = {
-  None: "NONE",
-  Submenu: "SUBMENU",
-  Copy: "COPY",
-  CopyAbsolutePath: "COPY_ABSOLUTE_PATH",
-  Cut: "CUT",
-  Paste: "PASTE",
-  NewFile_Directory: "NewFile_Directory",
-  NewFile_File: "NewFile_File",
-  DeleteFile_Directory: "DeleteFile_Directory",
-  DeleteFile_File: "DeleteFile_File",
-  RenameFile_Directory: "RenameFile_Directory",
-  RenameFile_File: "RenameFile_File",
-  Find: "FIND",
+  None: 0,
+  Submenu: 1,
+  Copy: 2,
+  CopyAbsolutePath: 3,
+  Cut: 4,
+  Paste: 5,
+  NewFile_Directory: 6,
+  NewFile_File: 7,
+  DeleteFile_Directory: 8,
+  DeleteFile_File: 9,
+  RenameFile_Directory: 10,
+  RenameFile_File: 11,
+  Find: 12,
 };
 
 /**
