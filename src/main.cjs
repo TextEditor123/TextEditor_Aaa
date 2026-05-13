@@ -1914,7 +1914,7 @@ sec0*/
 - [ ] What is the cost of document.getElementById(...)
     - [ ] Should a non-zero amount of scenarios where you cache this be changed to instead invoke the method to get the reference when needed.
 
-- [ ] When storing numbers or bools, how does this compare to a UInt...Array that has storage for these such things.
+- [ ] When storing numbers or booleans, how does this compare to a UInt...Array that has storage for these such things.
     - [ ] Instead of storing your numbers in a global scope you have a UInt...Array and put numbers in there.
     - [ ] Then to access the previous number variable you instead access the UInt...Array at some hardcoded index that represents the variable.
     - [ ] (the datatypes of number and uint... are not equivalent, but this presumes there is a valid conversion between them given the use case.
