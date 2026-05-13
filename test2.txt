@@ -175,7 +175,22 @@ Otherwise procrastination and analysis paralysis will have you
 wondering whether you should do the optimization for your entire life
 and you never actually get around to writing a single line of code for it.
 
+====
 
+A "hack" is a negative description.
+"Hacking" something together is too I believe has a negative connotation.
+
+But a good programmer can write little snippets of "hacked together code"
+in a way that is organized.
+
+And then the final separator is that
+a "hack" believes the "hacked together code" is the final result.
+
+A good programmer acknowledges that all code is flawed
+and thus a tiny bit of organized "hacking" to feel something out
+can be extremely useful, and that your "hacked together code" isn't the final result,
+but instead a series of steps to get the true best solution
+because you can feel out the requirements of the app.
 
 
 
