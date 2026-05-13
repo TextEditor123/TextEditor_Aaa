@@ -1985,6 +1985,11 @@ sec0*/
 
 - [ ] Why does find all not work?
 
+- [ ] Google AI Overview "javascript if I declare a variable as const and its value is an int does the engine optimize the storage" paraphrased:
+    - Small Integer Optimization (SMI)
+	- Constant Folding and Propagation
+	- Escape Analysis
+
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
 
