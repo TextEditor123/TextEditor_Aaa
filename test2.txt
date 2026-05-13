@@ -192,6 +192,15 @@ can be extremely useful, and that your "hacked together code" isn't the final re
 but instead a series of steps to get the true best solution
 because you can feel out the requirements of the app.
 
-
+I am a bit sloppier than what I'd like.
+It depends, sometimes I am just exhausted.
+And I understand the cost to benefit ratio of things.
+So due to being exhausted the code I write that day is extra sloppy.
+Is it worth while to write that snippet of code,
+or should I avoid putting that hard to read code in the app.
+Deadlines, emotional states,
+the fact that progress improves emotional state,
+the fact that those hard to read code snippets can very well destroy your app in the long run,
+it is all cost to benefit analysis moment to moment.
 
 
