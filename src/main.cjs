@@ -2001,3 +2001,9 @@ I think it does at a glance but I don't wanna unintentionally go easy on myself.
 the task for - [/] 'did-change-text-document-notification'
 - I added a string to the renderer, but I know I also as I was looking through the code removed a pointless global allocation so it evens out without me having to even think about the other things I've done not that I wouldn't consider them I'm just saying I wouldn't even have to if I wanted to even it out.
 */
+
+/*
+wait that's very weird actually.
+I opened vscode and I it opened such that the scrollTop was showing the multiline comment that spans multiple lines which is just above this one.
+The entirety of the text showed almost like it was being lexed as JavaScript, then it became a comment syntax highlighting color.
+*/
