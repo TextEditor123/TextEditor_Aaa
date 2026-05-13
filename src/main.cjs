@@ -1931,4 +1931,6 @@ sec0*/
     - [ ] JavaScript function inlining?
         - [ ] There does exist engine level automatic inlining but then the question is how you can determine whether a certain function has a tendency to do this or not
         - [ ] There doesn't seem to an attribute for aggressive inlining
+
+I'm not feeling well, I'm trying to figure out how I can make any semblence of progress for the day then I'm probably done
 */
