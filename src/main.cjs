@@ -2015,4 +2015,6 @@ similar to how I'm doing it?
 I just made another youtube playlist and I think I get why I do it.
 I think I am just vibing to a song and it makes me wanna make a public playlist.
 I think I'm lonely.
+
+Alright I privated the 2026-05-13_2 playlist don't worry.
 */
