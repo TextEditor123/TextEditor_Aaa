@@ -1962,7 +1962,7 @@ And thus I'm willing to engage in discipline to mend the gaps between the varyin
 
 Right now I feel like garbage for example.
 
-And the self perceived progress on any given day is very innacurrate.
+And the self perceived progress on any given day is very inaccurate.
 Just because you feel like garbage for the entirety of the time you coded that day,
 and other days you felt amazing while coding for the entirety of the time you coded that day.
 One of those coding sessions isn't necessarily more productive than the other.
