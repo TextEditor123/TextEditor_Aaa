@@ -2018,4 +2018,8 @@ open and I'm staring at it and I'm getting NOTHING done. It is so frustrating.
 
 I literally have had the code open this entire time and I've done nothing.
 
+I don't want to play videogames actually.
+It is just that my brain is completely zeroing out on me.
+And the videogames are more quick to take advantage of my brain to make me feel like continuing engaging with them.
+
 */
