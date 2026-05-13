@@ -5372,33 +5372,6 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                 let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
                 childIndex = EDITOR_language_line_lex(div, substart, subend, childIndex);
                 substart += (subend - substart);
-                //switch (EDITOR_extensionKind) {
-                //    case ExtensionKind.JavaScript:
-                //    {
-                //        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
-                //        childIndex = JS_line_lex(div, substart, subend, childIndex);
-                //        substart += (subend - substart);
-                //        break;
-                //    }
-                //    default:
-                //    {
-                //        let span;
-                //        if (childIndex < div.children.length) {
-                //            span = div.children[childIndex++];
-                //            span.className = '';
-                //        }
-                //        else {
-                //            span = document.createElement('span');
-                //            div.appendChild(span);
-                //            childIndex++;
-                //        }
-                //        
-                //        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
-                //        span.innerText = EDITOR_decode_raw(substart, subend - substart);
-                //        substart += (subend - substart);
-                //        break;
-                //    }
-                //}
             }
     
             {
@@ -5439,24 +5412,6 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
     
         if (substart < line.end) {
             childIndex = EDITOR_language_line_lex(div, substart, line.end, childIndex);
-            //switch (EDITOR_extensionKind) {
-            //    case ExtensionKind.JavaScript:
-            //        childIndex = JS_line_lex(div, substart, line.end, childIndex);
-            //        break;
-            //    default:
-            //        let span;
-            //        if (childIndex < div.children.length) {
-            //            span = div.children[childIndex++];
-            //            span.className = '';
-            //        }
-            //        else {
-            //            span = document.createElement('span');
-            //            div.appendChild(span);
-            //            childIndex++;
-            //        }
-            //        span.innerText = EDITOR_decode_raw(substart, line.end - substart);
-            //        break;
-            //}
         }
     }
 
@@ -7891,6 +7846,8 @@ function EDITOR_language_line_lex_SET(extensionKind) {
  * ...by reducing worst case.
  * This makes line lexing JS faster so it is preferable even if I don't write this plaintext implementation perfectly.
  * "maybe" it's faster I didn't measure anything but I swear I know what I'm doing
+ * not only did I not measure it but I went back and forth between vscode I actually have no idea if this faster I can't remember anything I'm super tired.
+ * I'm tired and I still have to write more of the multicursor logic so I'm just vibing out the optimizations for a bit I'll get measurements later when the app works more.
  */
 function PLAINTEXT_line_lex(div, substart, lineEnd, childIndex) {
     let length = 0;
