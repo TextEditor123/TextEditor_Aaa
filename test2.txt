@@ -212,4 +212,6 @@ Meanwhile I'm the only one writing that code so the perfection slows everything 
 and the stress is high,
 and you abandon the project.
 
-
+I think deeply about my good code.
+And I think deeply about my bad code.
+They are all a means to an end that I have mapped out years ahead of time.
