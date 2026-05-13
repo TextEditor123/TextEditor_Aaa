@@ -1931,13 +1931,6 @@ sec0*/
 
 - [ ] More multicursor progress
 
-- [ ] Determine how you will change the lexer for various file extensions.
-    - [ ] Is doing this immediately via the file extension reasonable?
-    - [ ] I think so...
-        - [ ] so then how do you have the renderer process determine the file extension?
-        - [ ] Is the I think it is 'path' is this available in the renderer process?
-        - [ ] Also investigate why you have confusion about whether the renderer process would or would not have access to 'path'.
-
 - [ ] A completely in-memory file then save-as
 - [ ] save-as but for any file
 
@@ -1946,23 +1939,30 @@ sec0*/
         - [ ] There does exist engine level automatic inlining but then the question is how you can determine whether a certain function has a tendency to do this or not
         - [ ] There doesn't seem to an attribute for aggressive inlining
 
-- [ ] 'did-change-text-document-notification'
-    - [ ] the first thing this does is:
-        - [ ] absolutePath = formatAbsolutePath(absolutePath);
-        - [ ] consider storing in renderer process the formatted absolute path so you don't have to do this everytime?
-	- [ ] The solution currently is adding another string to the renderer so it is a BAD solution
-	- [ ] But this code has to be written first in order to get a final solution or just even do it for the
+- [/] 'did-change-text-document-notification'
+    - [/] the first thing this does is:
+        - [/] absolutePath = formatAbsolutePath(absolutePath);
+        - [/] consider storing in renderer process the formatted absolute path so you don't have to do this everytime?
+	- [/] The solution currently is adding another string to the renderer so it is a BAD solution
+	- [/] But this code has to be written first in order to get a final solution or just even do it for the
 	    sake of crossing this off and saying I tried but it isn't worth or like literally anything
 
-- [ ] Enums that are strings optimization vs an int?
+- [/] Determine how you will change the lexer for various file extensions.
+    - [/] Is doing this immediately via the file extension reasonable?
+    - [/] I think so...
+        - [/] so then how do you have the renderer process determine the file extension?
+        - [/] Is the I think it is 'path' is this available in the renderer process?
+        - [/] Also investigate why you have confusion about whether the renderer process would or would not have access to 'path'.
+
+- [/] Enums that are strings optimization vs an int?
     - Enums are "objects?" with named property to value mappings?
 	- this sounds extremely expensive for what it is?
 	- maybe it isn't as bad as it sounds
-	- [ ] If I use a string, even if that string is somehow blitted or through interning has extremely minimal overhead on the GC
+	- [/] If I use a string, even if that string is somehow blitted or through interning has extremely minimal overhead on the GC
 	    you still have to add that data to the end program so you'd no matter what be better off with a number
 		albeit the amount you'd be better off by I'm still not overly certain.
-	- [ ] dah, when you switch over the enum if it got converted to a string at any point it doesn't work
-	- [ ] I suppose one thing to consider would be re-using the same string literal value
+	- [/] dah, when you switch over the enum if it got converted to a string at any point it doesn't work
+	- [/] I suppose one thing to consider would be re-using the same string literal value
 	    because in the UI you need to display a "name" for the menu option.
 		This name was "Copy", but the Enum was "COPY" so this resulted in "COPY" existing as data for no reason
 	
