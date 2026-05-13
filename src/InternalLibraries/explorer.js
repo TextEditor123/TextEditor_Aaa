@@ -456,7 +456,12 @@ async function EXPLORER_openInEditor(absolutePath, shouldFocus) {
         return;
     }
 
-    EDITOR_setText(itHasBom.text, itHasBom.fileStartsWithBom, /*textSourceIdentifier*/ absolutePath, /*FORMATTED_textSourceIdentifier*/ itHasBom.formattedAbsolutePath);
+    EDITOR_setText(
+        itHasBom.text,
+        itHasBom.fileStartsWithBom,
+        /*textSourceIdentifier*/ absolutePath,
+        /*FORMATTED_textSourceIdentifier*/ itHasBom.formattedAbsolutePath,
+        /*extensionKind*/ EDITOR_toExtensionKind(itHasBom.extension));
     if (shouldFocus) {
         let editor = document.getElementById('EDITOR');
         if (editor) {

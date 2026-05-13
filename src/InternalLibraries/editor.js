@@ -109,6 +109,11 @@
  * 
  */
 
+/**
+ * If you have an extension listed here, it is expected that the "function to invoke" exists.
+ * As of right now any patterns to naming the function that gets invoked are tentative.
+ * But I am not checking whether JS_full_lex or JS_line_lex exist, I'm just switching on ExtensionKind and presuming that function exists.
+ */
 const ExtensionKind = {
     None: 0,
     JavaScript: 1,
@@ -939,6 +944,7 @@ let EDITOR_detailRank3OriginLine = 0;
 
 let EDITOR_textSourceIdentifier = '';
 let EDITOR_FORMATTED_textSourceIdentifier = '';
+let EDITOR_extensionKind = ExtensionKind.None;
 let EDITOR_fileStartsWithBom = false;
 
 let EDITOR_lineEndString = null;
@@ -1020,6 +1026,7 @@ function EDITOR_clear() {
     EDITOR_recentBoundingClientRect = null;
     EDITOR_textSourceIdentifier = '';
     EDITOR_FORMATTED_textSourceIdentifier = '';
+    EDITOR_extensionKind = ExtensionKind.None;
     EDITOR_fileStartsWithBom = '';
     EDITOR_lineEndString = null;
     EDITOR_textElement.innerHTML = '';
@@ -1111,13 +1118,14 @@ function EDITOR_getFinalizedEditsAndRawSaveFileData(NOTfinalizePendingEdits) {
  * @param {string} textSourceIdentifier I intend to have this be an absolute path. Then when the app saves a file, it can verify against the database that this absolute path is "safe" and then write to the file.
  * @param {string} lineEndString pass null (or do not include the parameter) to have line endings set to the first encountered kind in the text. Otherwise specify here. The string is used EXACTLY AS PROVIDED if non-falsey.
  */
-function EDITOR_setText(text, fileStartsWithBom, textSourceIdentifier, FORMATTED_textSourceIdentifier, lineEndString) {
+function EDITOR_setText(text, fileStartsWithBom, textSourceIdentifier, FORMATTED_textSourceIdentifier, extensionKind, lineEndString) {
     EDITOR_clear();
 
     EDITOR_fileStartsWithBom = fileStartsWithBom;
 
     EDITOR_textSourceIdentifier = textSourceIdentifier;
     EDITOR_FORMATTED_textSourceIdentifier = FORMATTED_textSourceIdentifier;
+    EDITOR_extensionKind = extensionKind;
     EDITOR_lineEndString = lineEndString;
 
     // When doing a "full reset" it is easier to just add EOF at the end.
@@ -1168,8 +1176,10 @@ function EDITOR_setText(text, fileStartsWithBom, textSourceIdentifier, FORMATTED
 
     update_verticalVirtualizationBoundary();
 
-    if (JS_full_lex) {
-        EDITOR_trackedSyntaxList = JS_full_lex(EDITOR_textByteList.bytes, EDITOR_textByteList.count);
+    switch (EDITOR_extensionKind) {
+        case ExtensionKind.JavaScript:
+            EDITOR_trackedSyntaxList = JS_full_lex(EDITOR_textByteList.bytes, EDITOR_textByteList.count);
+            break;
     }
 
     EDITOR_drawGutter_Width();
@@ -5357,26 +5367,32 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
             }
     
             if (EDITOR_pooledTrackedSyntax.start > substart) {
-                if (JS_line_lex) {
-                    let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
-                    childIndex = JS_line_lex(div, substart, subend, childIndex);
-                    substart += (subend - substart);
-                }
-                else {
-                    let span;
-                    if (childIndex < div.children.length) {
-						span = div.children[childIndex++];
-                        span.className = '';
-					}
-					else {
-						span = document.createElement('span');
-                        div.appendChild(span);
-                        childIndex++;
-					}
-                    
-                    let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
-                    span.innerText = EDITOR_decode_raw(substart, subend - substart);
-                    substart += (subend - substart);
+                switch (EDITOR_extensionKind) {
+                    case ExtensionKind.JavaScript:
+                    {
+                        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
+                        childIndex = JS_line_lex(div, substart, subend, childIndex);
+                        substart += (subend - substart);
+                        break;
+                    }
+                    default:
+                    {
+                        let span;
+                        if (childIndex < div.children.length) {
+                            span = div.children[childIndex++];
+                            span.className = '';
+                        }
+                        else {
+                            span = document.createElement('span');
+                            div.appendChild(span);
+                            childIndex++;
+                        }
+                        
+                        let subend = EDITOR_pooledTrackedSyntax.start > line.end ? line.end : EDITOR_pooledTrackedSyntax.start; // probably a nonsense line of code given the previous if statements
+                        span.innerText = EDITOR_decode_raw(substart, subend - substart);
+                        substart += (subend - substart);
+                        break;
+                    }
                 }
             }
     
@@ -5417,21 +5433,23 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
         }
     
         if (substart < line.end) {
-            if (JS_line_lex) {
-                childIndex = JS_line_lex(div, substart, line.end, childIndex);
-            }
-            else {
-                let span;
-                if (childIndex < div.children.length) {
-					span = div.children[childIndex++];
-                    span.className = '';
-				}
-				else {
-					span = document.createElement('span');
-                    div.appendChild(span);
-                    childIndex++;
-				}
-                span.innerText = EDITOR_decode_raw(substart, line.end - substart);
+            switch (EDITOR_extensionKind) {
+                case ExtensionKind.JavaScript:
+                    childIndex = JS_line_lex(div, substart, line.end, childIndex);
+                    break;
+                default:
+                    let span;
+                    if (childIndex < div.children.length) {
+                        span = div.children[childIndex++];
+                        span.className = '';
+                    }
+                    else {
+                        span = document.createElement('span');
+                        div.appendChild(span);
+                        childIndex++;
+                    }
+                    span.innerText = EDITOR_decode_raw(substart, line.end - substart);
+                    break;
             }
         }
     }
@@ -7837,4 +7855,14 @@ function EDITOR_decode_experimental_gapBuffer(gapBuffer, start, length) {
 	
 	
 	return EDITOR_decode_pooled_stringBuilder_array.join('');
+}
+
+function EDITOR_toExtensionKind(extensionWithPeriod) {
+    switch (extensionWithPeriod) {
+        case '.js':
+        case '.cjs':
+            return ExtensionKind.JavaScript;
+        default:
+            return ExtensionKind.None;
+    }
 }
