@@ -32,14 +32,12 @@ function EDITOR_onScroll() {
 			// - replace its text with the text that ought to show at the newly scrolled into view index
 			// - move the index of that 0th index line to be the final line of text that is being displayed
 			// repeat this for as many lines of text that came into view
-			return;
 		}
 		else if (/*the user scrolled to a smaller scrollTop*/) {
 			// re-use the (countLinesOfTextBeingShown - 1) index line of text
 			// - replace its text with the text that ought to show at the newly scrolled into view index
 			// - move the index of that (countLinesOfTextBeingShown - 1) index line to be the first line of text that is being displayed
 			// repeat this for as many lines of text that came into view
-			return;
 		}
 		else {
 			// This is where the previous 'if' and 'else if' are somewhat misleading.
@@ -48,7 +46,6 @@ function EDITOR_onScroll() {
 			//
 			// foreach line of text that is being displayed
 			// - replace its text with the text that ought to show at that newly scrolled into view index
-			return;
 		}
 	}
 	else {
@@ -59,7 +56,40 @@ function EDITOR_onScroll() {
 	}
 }
 
+The code that draws a line of text:
 
+https://github.com/TextEditor123/TextEditor_Aaa/blob/master/src/InternalLibraries/editor.js#L5319
+function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
+	if (/*the line of text is empty*/) {
+		// draw an empty line of text on the UI
+	}
+	else {
+		while (/*the line has not been completely drawn*/) {
+			if (/*syntax that spans multiple lines encompasses this line*/) {
+				// i.e.:
+				// - multi-line comment that spans multiple lines
+				// - `` deliminated JavaScript string that spans multiple lines
+				//
+				// Then pull out a substring from this line of text
+				// that contains the encompassed text.
+				// - Create a <span> with the CSS class that represents the proper syntax highlighting
+				// - Set the span's innerText to that substring.
+			}
+			else {
+				// Any remaining text for the line is given to the JavaScript lexer.
+				// 
+				// The JavaScript lexer will then on the fly lex the remaining text
+				// into the various single-line spanning syntax
+				// 
+				// and perform the previously described steps of
+				// pulling out a substring
+				// - Create a <span> with the CSS class that represents the proper syntax highlighting
+				// - Set the span's innerText to that substring.
+			}
+		}
+		
+	}
+}
 
 
 
