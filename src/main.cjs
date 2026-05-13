@@ -1964,6 +1964,8 @@ sec0*/
     - [ ] the underlying instance is already allocated.
     - [ ] unless it isn't... because you need to allocate some kind of Action or Func like wrapper of sorts I'm not sure.
     - [ ] Might still be worth while to avoid the switch so much?
+    - [ ] Ah but the default case doesn't invoke anything.
+    - [ ] So then you'd be better off optimizing elsewhere first I imagine unless measurements show otherwise there is no reason to currently look at this beyond the current solution.
 
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
