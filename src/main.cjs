@@ -1926,4 +1926,9 @@ sec0*/
 
 - [ ] A completely in-memory file then save-as
 - [ ] save-as but for any file
+
+- [ ] Cost of function invocation
+    - [ ] JavaScript function inlining?
+        - [ ] There does exist engine level automatic inlining but then the question is how you can determine whether a certain function has a tendency to do this or not
+        - [ ] There doesn't seem to an attribute for aggressive inlining
 */
