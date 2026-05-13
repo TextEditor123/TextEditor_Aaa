@@ -1954,4 +1954,9 @@ It isn't entirely pointless... but you probably get what I'm saying, I want to d
 I have a daily bank of stress resilience that I'd like to deplete a bit because it is time gated I can't just
 avoid stress and accrue an infinite amount of stress resilience over time there is a cap so I need to
 incur stress responsibly on a day to day basis to keep everything manageable.
+
+Not just that but even though discipline is important.
+There also is a degree of "I occassionally find enjoyment" that helps keep you doing something.
+I feel like garbage constantly but I take solace in the fact that I occassionally feel incredibly good while coding.
+And thus I'm willing to engage in discipline to mend the gaps between the varying moods.
 */
