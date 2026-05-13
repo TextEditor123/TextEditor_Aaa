@@ -3,22 +3,13 @@ let APP_lineHeight = 20;
 
 init();
 
-//#region THEME
-{
-const btn = document.getElementById('HEADER_buttonSettings');
-btn.addEventListener('click', async () => {
-    await DIALOG_show_async(DialogKind.Settings);
-});
-}
-//#endregion
-
 // TODO: Measure app line height and use that instead of hacking around with the text editor's line height...
 // ...was measured, some places changed usage but not all.
 
 function APP_measureLineHeightAndCharacterWidth() {
-    let body = document.getElementById('ROOT');
+    const body = document.getElementById('ROOT');
 
-    let measureElement = document.createElement('div');
+    const measureElement = document.createElement('div');
     measureElement.style.width = "fit-content";
     measureElement.innerText = "0";
     body.appendChild(measureElement);
@@ -46,24 +37,23 @@ function APP_measureLineHeightAndCharacterWidth() {
     */
 
     measureElement.innerText = "-";
-    let minusWidth = measureElement.offsetWidth;
+    const minusWidth = measureElement.offsetWidth;
     measureElement.innerText = "+";
-    let plusWidth = measureElement.offsetWidth;
+    const plusWidth = measureElement.offsetWidth;
 
     // TODO: the 'explorer.js' file currently uses the text '}' for 'case TrackedSyntaxKind.HACK_NOTisExpandable_isExpanded:'...
     // ...this case isn't currently being hit...
     // ...but if it ever were to be hit, perhaps the width of the span would act weirdly if '}' turns out to be the largest width.
 
-    let largerWidth = minusWidth > plusWidth ? minusWidth : plusWidth;
-    largerWidth = Math.ceil(largerWidth);
+    const largerWidth = Math.ceil(minusWidth > plusWidth ? minusWidth : plusWidth);
 
     EXPLORER_firstSpanWidthValue = largerWidth;
     EXPLORER_firstSpanWidth = EXPLORER_firstSpanWidthValue + 'px';
 
     const root = document.documentElement;
     const computedStyles = window.getComputedStyle(root);
-    let appLineHeight = APP_lineHeight + 'px';
-    let propertyName = '--APP-line-height';
+    const appLineHeight = APP_lineHeight + 'px';
+    const propertyName = '--APP-line-height';
     if (computedStyles.getPropertyValue(propertyName) !== appLineHeight) {
         // avoid layout with if statement
         root.style.setProperty(propertyName, appLineHeight);
@@ -73,6 +63,13 @@ function APP_measureLineHeightAndCharacterWidth() {
 }
 
 function init() {
+
+    document
+        .getElementById('HEADER_buttonSettings')
+        .addEventListener('click', async () => {
+            return DIALOG_show_async(DialogKind.Settings);
+        });
+
     window.myAPI.onMessage(async (data) => {
         EDITOR_documentSymbolResult = data;
         EDITOR_listComponent.setItems(APP_lineHeight, APP_lineHeight + 'px',
@@ -95,7 +92,7 @@ function init() {
                 }
                 else {
                     // TODO: Ensure that json parsing the title like this is a safe way of doing things
-                    let startPosition = JSON.parse(div.title);
+                    const startPosition = JSON.parse(div.title);
                     EDITOR_moveCursor_lineIndex_columnIndex(startPosition.line, startPosition.character);
                 }
             },
@@ -108,16 +105,12 @@ function init() {
         });
     });
 
-    let body = document.getElementById('ROOT');
-
     APP_measureLineHeightAndCharacterWidth();
 
-    let EDITOR_gotoF_button = document.getElementById('EDITOR_gotoF');
-    EDITOR_gotoF_button.addEventListener('click', async () => {
-        await window.myAPI.editorDocumentSymbolsRequest();
-        //await DIALOG_show_async(DialogKind.DocumentSymbol);
-    });
+    const EDITOR_gotoF_button = document.getElementById('EDITOR_gotoF');
+    EDITOR_gotoF_button.addEventListener('click', window.myAPI.editorDocumentSymbolsRequest);
 
+    const body = document.getElementById('ROOT');
     body.addEventListener('keydown', async event => {
         
         switch (event.key) {
@@ -128,8 +121,8 @@ function init() {
                     return;
                 }
 
-                let unvalidatedAbsolutePath = EDITOR_textSourceIdentifier;
-                let rawData = EDITOR_getFinalizedEditsAndRawSaveFileData();
+                const unvalidatedAbsolutePath = EDITOR_textSourceIdentifier;
+                const rawData = EDITOR_getFinalizedEditsAndRawSaveFileData();
                 if (rawData.uint8arrayTextBytes) {
                     event.preventDefault();
                     event.stopPropagation();
@@ -143,13 +136,12 @@ function init() {
                     return;
                 }
 
-                await DIALOG_show_async(DialogKind.FindAll);
-                break;
+                return DIALOG_show_async(DialogKind.FindAll);
             case 'Escape':
             	// TODO: Provide a way to disable the next (body, and useCapture) 'Escape' keypress...
             	// ...so a widget can restore focus to the relevant UI rather than
             	// the 'EDITOR' when the user presses 'Escape' to "cancel".
-				let editor = document.getElementById('EDITOR');
+				const editor = document.getElementById('EDITOR');
 		        if (editor) {
 		            editor.focus();
 		        }
@@ -165,7 +157,7 @@ function init() {
                 break;
             case 'E':
         		if (event.altKey && event.shiftKey) {
-        			let editor = document.getElementById('EDITOR');
+        			const editor = document.getElementById('EDITOR');
 			        if (editor) {
 			            editor.focus();
 			            EXPLORER_setShow(false);
