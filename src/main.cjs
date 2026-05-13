@@ -1962,6 +1962,9 @@ sec0*/
 	    you still have to add that data to the end program so you'd no matter what be better off with a number
 		albeit the amount you'd be better off by I'm still not overly certain.
 	- [ ] dah, when you switch over the enum if it got converted to a string at any point it doesn't work
+	- [ ] I suppose one thing to consider would be re-using the same string literal value
+	    because in the UI you need to display a "name" for the menu option.
+		This name was "Copy", but the Enum was "COPY" so this resulted in "COPY" existing as data for no reason
 	
 - [ ] Could you get a reference to the function as a variable?
     - [ ] that presumably would have "some degree of overhead for GC" since you're adding a reference that it has to traverse.
