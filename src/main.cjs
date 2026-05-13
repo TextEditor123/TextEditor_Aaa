@@ -1958,6 +1958,12 @@ sec0*/
     - Enums are "objects?" with named property to value mappings?
 	- this sounds extremely expensive for what it is?
 	- maybe it isn't as bad as it sounds
+	
+- [ ] Could you get a reference to the function as a variable?
+    - [ ] that presumably would have "some degree of overhead for GC" since you're adding a reference that it has to traverse.
+    - [ ] the underlying instance is already allocated.
+    - [ ] unless it isn't... because you need to allocate some kind of Action or Func like wrapper of sorts I'm not sure.
+    - [ ] Might still be worth while to avoid the switch so much?
 
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
