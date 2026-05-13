@@ -1970,4 +1970,13 @@ You need both moods at separate coding sessions in order to ground yourself
 and see the reality of things.
 You shouldn't skip out on a coding session because of your mood,
 every mood has its own pros and cons.
+
+============
+
+Mood is very complicated.
+But it is important not to confuse 'pleasure' and 'competency'.
+This is most commonly seen in recreational use of dopaminergic substances without a prescription.
+It is a very very bad idea to do these things without the care of a doctor involved.
+
+
 */
