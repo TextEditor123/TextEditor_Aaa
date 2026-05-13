@@ -1991,5 +1991,4 @@ sec0*/
 	- Escape Analysis
 
 - [ ] I was wondering about this once I forgot a keyword and my code was still working: Accidental globals (variables declared without a keyword)
-
 */
