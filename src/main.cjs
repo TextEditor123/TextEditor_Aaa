@@ -2024,4 +2024,7 @@ And the videogames are more quick to take advantage of my brain to make me feel 
 
 What I want to do is write some code and make progress.
 
+I imagine a cartoon in my head. Where my cartoonified brain is a representation of me.
+And I like take a stick and poke it and say "do it do something" and I just sit here visualizing that for hours on end.
+
 */
