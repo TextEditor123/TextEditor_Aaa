@@ -1,8 +1,8 @@
 
 const WidgetKind = {
-    None: 'None',
-    InputText: 'InputText',
-    YesCancel: 'YesCancel',
+    None: 0,
+    InputText: 1,
+    YesCancel: 2,
 };
 
 let WIDGET_currentWidgetKind = WidgetKind.None;

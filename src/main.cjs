@@ -1958,6 +1958,9 @@ sec0*/
     - Enums are "objects?" with named property to value mappings?
 	- this sounds extremely expensive for what it is?
 	- maybe it isn't as bad as it sounds
+	- [ ] If I use a string, even if that string is somehow blitted or through interning has extremely minimal overhead on the GC
+	    you still have to add that data to the end program so you'd no matter what be better off with a number
+		albeit the amount you'd be better off by I'm still not overly certain.
 	
 - [ ] Could you get a reference to the function as a variable?
     - [ ] that presumably would have "some degree of overhead for GC" since you're adding a reference that it has to traverse.
