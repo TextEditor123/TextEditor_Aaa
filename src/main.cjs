@@ -1982,5 +1982,19 @@ It is a very very bad idea to do these things without the care of a doctor invol
 
 It's been 4 hours and I still haven't written any code.
 Today is a very eh kind of vibe for me.
+In my mind I'm just focused on "what is the plan to reach the goal long term" I gotta just
+do the bare minimum fatigue relative to how I feel that day.
+And the bar is very very low for what I need to accomplish today.
+The reason my throughput might seem high.
+Is because no matter what my mood is I always push to do as much as I can.
+By doing that you maximize the amount of good moods you are in.
+Because everyday no matter how you feel you sit there and TRY to get into it.
+And you can't just make excuses to do nothing.
+You have to sit there and achieve something even if it is small.
+And some days I'll start off in the worst mood ever and I accomplish a single
+goal and suddenly I'm over the moon and can go all day without even trying
+("going all day" wouldn't be a good thing because you need to take a break at some point to exercise and etc...
+but it emphasizes the idea that you gotta just get started
+because your mood at the start isn't necessarily going to be your mood the entire session).
 
 */
