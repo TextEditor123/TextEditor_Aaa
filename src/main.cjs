@@ -2022,4 +2022,6 @@ I don't want to play videogames actually.
 It is just that my brain is completely zeroing out on me.
 And the videogames are more quick to take advantage of my brain to make me feel like continuing engaging with them.
 
+What I want to do is write some code and make progress.
+
 */
