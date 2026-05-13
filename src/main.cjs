@@ -1942,6 +1942,7 @@ sec0*/
         - [ ] absolutePath = formatAbsolutePath(absolutePath);
         - [ ] consider storing in renderer process the formatted absolute path so you don't have to do this everytime?
 
+// I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 
 I'm not feeling well, I'm trying to figure out how I can make any semblance of progress for the day then I'm probably done
 
