@@ -1967,6 +1967,13 @@ sec0*/
     - [ ] Ah but the default case doesn't invoke anything.
     - [ ] So then you'd be better off optimizing elsewhere first I imagine unless measurements show otherwise there is no reason to currently look at this beyond the current solution.
 
+- [ ] Something to consider when syntax highlighting:
+    - [ ] If you syntax highlight brace characters either open or close.
+    - [ ] You already have logic to say two or more brace characters that are contiguous get wrapped in the same span.
+    - [ ] But you also could say, if they are separated by whitespace then you could have 1 span for them and the whitespace?
+    - [ ] Because whitespace is invisible so if you colored it, nothing would change?
+    - [ ] maybe is a bad idea.
+
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
 
