@@ -143,6 +143,9 @@ function menuSet(context, target, optionList, left, top, NOTshouldFocus, index) 
 const menuElement = document.getElementById('MENU');
 
 let recentBoundingClientRect = null;
+/**
+ * TODO: You need to move this to 'MENU_onMouseMove_WRAPIT(...)' and pass it to 'MENU_onMouseMove' in some way that remembers the state during the throttle or whatever I can't word it right now but I understand that it is wrong and why it is but I'm too tired to write the fix.
+ */
 let recentBoundingClientRect_ID = null;
 
 let MENU_onMouseMove_timer = null;
