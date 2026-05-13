@@ -203,4 +203,13 @@ the fact that progress improves emotional state,
 the fact that those hard to read code snippets can very well destroy your app in the long run,
 it is all cost to benefit analysis moment to moment.
 
+But, since I'm the only developer on this repo
+I am more open to being a bit sloppier
+because the emotional state of doing something like this
+is extremely difficult.
+And I need to make sure I don't abandon the project due to seeking perfection in every line of code.
+Meanwhile I'm the only one writing that code so the perfection slows everything to a halt,
+and the stress is high,
+and you abandon the project.
+
 
