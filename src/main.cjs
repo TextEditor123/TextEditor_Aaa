@@ -1932,7 +1932,7 @@ sec0*/
         - [ ] There does exist engine level automatic inlining but then the question is how you can determine whether a certain function has a tendency to do this or not
         - [ ] There doesn't seem to an attribute for aggressive inlining
 
-I'm not feeling well, I'm trying to figure out how I can make any semblence of progress for the day then I'm probably done
+I'm not feeling well, I'm trying to figure out how I can make any semblance of progress for the day then I'm probably done
 
 That's why I'm trying to visualize the tasks in my mind by typing them out.
 It is good no matter what. But especially at the moment because I "feel" like I can't do anything.
