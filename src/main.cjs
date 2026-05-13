@@ -1974,6 +1974,8 @@ sec0*/
     - [ ] Because whitespace is invisible so if you colored it, nothing would change?
     - [ ] maybe is a bad idea.
 
+- [ ] Get character when a pending edit needs to be fixed it isn't working.
+
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
 
