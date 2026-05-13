@@ -2068,5 +2068,9 @@ Am I causing an allocation to exist that otherwise could be avoided by holding a
 If the allocation already happened regardless then simply holding a reference to an existing object
 wouldn't be nearly as bad as causing an object to exist that otherwise wouldn't.
 
-It seems to be a reference to an already existing object
+It seems to be a reference to an already existing object.
+
+And I think that kinda "screams out" to me that I might wanna further the "span" pooling logic to pool some instances extra if an excess exists on any given line
+cause each span is maybe far more expensive than I initially was giving it credit for.
+Because each span has a whole lot of inner properties on it.
 */
