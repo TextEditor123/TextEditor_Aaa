@@ -1937,6 +1937,12 @@ sec0*/
         - [ ] There does exist engine level automatic inlining but then the question is how you can determine whether a certain function has a tendency to do this or not
         - [ ] There doesn't seem to an attribute for aggressive inlining
 
+- [ ] 'did-change-text-document-notification'
+    - [ ] the first thing this does is:
+        - [ ] absolutePath = formatAbsolutePath(absolutePath);
+        - [ ] consider storing in renderer process the formatted absolute path so you don't have to do this everytime?
+
+
 I'm not feeling well, I'm trying to figure out how I can make any semblance of progress for the day then I'm probably done
 
 That's why I'm trying to visualize the tasks in my mind by typing them out.
