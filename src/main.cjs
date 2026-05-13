@@ -2016,4 +2016,6 @@ I constantly feel like I don't want to do this anymore.
 I want to just play videogames is all I can think while I'm sitting here and I spend hours just sitting here with the code
 open and I'm staring at it and I'm getting NOTHING done. It is so frustrating.
 
+I literally have had the code open this entire time and I've done nothing.
+
 */
