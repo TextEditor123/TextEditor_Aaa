@@ -394,7 +394,7 @@ class ListComponent {
         this.event_scroll_bool = true;
 	    if (!this.event_scroll_timer) {
 	    	this.event_scroll();
-            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
+            // TODO: it doesn't work if I use 'this.' inside the 'setTimeout(...)' and I don't know why
 	        this.event_scroll_timer = setTimeout(event_scroll_timeoutFunc, 100);
 	    }
     }
@@ -403,7 +403,7 @@ class ListComponent {
         if (/*trailing && lastArgs*/ this.event_scroll_bool) {
             this.event_scroll();
             this.event_scroll_bool = false;
-            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
+            // TODO: it doesn't work if I use 'this.' inside the 'setTimeout(...)' and I don't know why
             this.event_scroll_timer = setTimeout(event_scroll_timeoutFunc, 100);
         } else {
             this.event_scroll_timer = null;
