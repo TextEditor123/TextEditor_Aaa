@@ -16,6 +16,7 @@ But nevertheless... I want to think about my decision.
 - Garbage collection red flags
 - Incremental optimization
 - Localized overhead vs appwide
+- Do I believe that I have written the localized optimization correctly
 
 The scroll event:
 
@@ -159,7 +160,20 @@ And for a hand wavy optimization such as this where I have no measurements I jus
 to feel things out.
 To cause app-wide overhead for a "maybe optimization" is extremely foolish.
 
+- Do I believe that I have written the localized optimization correctly:
 
+I'm actually completely unsure.
+My goal was to put the pieces in place in a way that reasonable.
+So that the groundwork for the optimization exists and then you can paste over the existing paragraphs of code
+that perform the current implementation, to whatever the end result implementation might look like.
+
+I'm not even entirely adverse to the idea that my current implementation
+might be slower than no optimization at all.
+
+But, it gives me that starting point and easy to change details.
+Otherwise procrastination and analysis paralysis will have you
+wondering whether you should do the optimization for your entire life
+and you never actually get around to writing a single line of code for it.
 
 
 
