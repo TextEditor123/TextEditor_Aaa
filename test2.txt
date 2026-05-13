@@ -154,7 +154,7 @@ You can pull from this cache to get a span instead of allocating a new one.
 
 - Localized overhead vs appwide:
 
-But, this leaps from localized optimization to app-wide optimization.
+But, this leaps from localized overhead to app-wide overhead.
 And for a hand wavy optimization such as this where I have no measurements I just kind of want
 to feel things out.
 To cause app-wide overhead for a "maybe optimization" is extremely foolish.
