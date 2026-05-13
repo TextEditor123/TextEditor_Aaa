@@ -13,8 +13,8 @@ If I were making a change for someone else's code I'd
 want to have something more than just a "feeling".
 But nevertheless... I want to think about my decision.
 
-- Incremental optimization
 - Garbage collection red flags
+- Incremental optimization
 - Localized overhead vs appwide
 
 The scroll event:
@@ -91,9 +91,75 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
 				// - Set the span's innerText to that substring.
 			}
 		}
-		
 	}
 }
+
+Understanding at least the basics of garbage collection is extremely important.
+
+I'd go as far as to say if you don't understand the basics,
+your likelihood of "poisoning" a codebase is extremely high and everything you do ought to be quarantined.
+
+This isn't to say that I don't bad code.
+But when I write bad code I usually do so with an understanding of the goal,
+and an understanding of whether I'm creating problems in the app as a whole.
+
+- Garbage collection red flags:
+
+with respect to the previously described code, the a major GC red flag
+is the creation of all the individual span elements whenever you draw a line.
+
+I would probably agree with you if you brought up the innerText calculations being an even bigger red flag.
+But in terms of complexity, and reasonably being able to optimize something.
+The spans stand out as a red flag AND they have a optimization that sounds quite reasonable.
+
+i.e.: when drawing the text and re-using previously drawn lines of text.
+You might be able to reduce the GC overhead of scrolling by re-using not only the existing divs,
+but also the existing spans.
+
+So, the change was to check if the previously drawn line of text
+has an already instantiated span element that is free to have its
+innerText swapped out.
+- if so, then do exactly that
+- otherwise you need to construct a new span element
+
+Then, when you're done drawing the line,
+if the previously drawn line of text
+had more spans than what you needed,
+you remove each of those extra spans.
+
+- Incremental optimization:
+
+I wanted to "feel" out what doing the previously described optimization would be like.
+So I did the mosts straightforward implementation of such an optimization.
+I'm not sure if I like my implementation, but regardless it brings me closer
+to feeling out whether it is a good change for the app as a whole.
+And then I can continually revisit the implementation and refine it over time
+if I feel it is of use.
+
+But, I haven't actually measured anything.
+This would be far more problematic if my implementation
+added "app-wide" overhead.
+But the implementation is localized, and thus I'm not overly bothered by this.
+
+*"app-wide" overhead is quite a hand wavy statement I'd have to determine my exact definition at a later point.
+... because all code in the short term is probably causing some degree of overhead.
+... I suppose I more so refer to whether the object allocations necessary would be long living or short living.
+
+When it comes to incremental optimization though,
+the final step is to remove all the extra spans that I didn't re-use (if any exist).
+
+This throwing away of the extra spans could be "optimized" such that you have a cache somewhere that you can store these spans.
+Then if you hit a new line of text that needs more spans than what the previously drawn line of text has.
+You can pull from this cache to get a span instead of allocating a new one.
+
+- Localized overhead vs appwide:
+
+But, this leaps from localized optimization to app-wide optimization.
+And for a hand wavy optimization such as this where I have no measurements I just kind of want
+to feel things out.
+To cause app-wide overhead for a "maybe optimization" is extremely foolish.
+
+
 
 
 
