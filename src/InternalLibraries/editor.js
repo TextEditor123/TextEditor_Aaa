@@ -933,6 +933,7 @@ let EDITOR_detailSmallLarge = {
 let EDITOR_detailRank3OriginLine = 0;
 
 let EDITOR_textSourceIdentifier = '';
+let EDITOR_FORMATTED_textSourceIdentifier = '';
 let EDITOR_fileStartsWithBom = false;
 
 let EDITOR_lineEndString = null;
@@ -1013,6 +1014,7 @@ function EDITOR_clear() {
     EDITOR_clearSelectionStyle(EDITOR_primaryCursor);
     EDITOR_recentBoundingClientRect = null;
     EDITOR_textSourceIdentifier = '';
+    EDITOR_FORMATTED_textSourceIdentifier = '';
     EDITOR_fileStartsWithBom = '';
     EDITOR_lineEndString = null;
     EDITOR_textElement.innerHTML = '';
@@ -1104,12 +1106,13 @@ function EDITOR_getFinalizedEditsAndRawSaveFileData(NOTfinalizePendingEdits) {
  * @param {string} textSourceIdentifier I intend to have this be an absolute path. Then when the app saves a file, it can verify against the database that this absolute path is "safe" and then write to the file.
  * @param {string} lineEndString pass null (or do not include the parameter) to have line endings set to the first encountered kind in the text. Otherwise specify here. The string is used EXACTLY AS PROVIDED if non-falsey.
  */
-function EDITOR_setText(text, fileStartsWithBom, textSourceIdentifier, lineEndString) {
+function EDITOR_setText(text, fileStartsWithBom, textSourceIdentifier, FORMATTED_textSourceIdentifier, lineEndString) {
     EDITOR_clear();
 
     EDITOR_fileStartsWithBom = fileStartsWithBom;
 
     EDITOR_textSourceIdentifier = textSourceIdentifier;
+    EDITOR_FORMATTED_textSourceIdentifier = FORMATTED_textSourceIdentifier;
     EDITOR_lineEndString = lineEndString;
 
     // When doing a "full reset" it is easier to just add EOF at the end.
@@ -2682,7 +2685,7 @@ function EDITOR_finalizeEdit(cursor) {
                 EDITOR_textByteList.insertBytes(cursor.editPosition, cursor.gapBuffer, /*offset*/ 0, /*length*/ cursor.gapBufferCount);
 
                 let ticket = ++ticket_didChangeTextDocumentNotificationPromise;
-                let textSourceIdentifier = EDITOR_textSourceIdentifier;
+                let textSourceIdentifier = EDITOR_FORMATTED_textSourceIdentifier;
                 let lineAndColumnIndices = EDITOR_getLineAndColumnIndices(cursor.editPosition);
                 // TODO: Account for any '\0\0\0\t' that exist on the line            
                 let text = EDITOR_decode_experimental_gapBuffer(cursor.gapBuffer, 0, cursor.gapBufferCount);
@@ -2790,7 +2793,7 @@ function EDITOR_finalizeEdit(cursor) {
                 EDITOR_textByteList.removeAt(cursor.editPosition, cursor.editLength);
 
                 let ticket = ++ticket_didChangeTextDocumentNotificationPromise;
-                let textSourceIdentifier = EDITOR_textSourceIdentifier;
+                let textSourceIdentifier = EDITOR_FORMATTED_textSourceIdentifier;
                 // TODO: Account for any '\0\0\0\t' that exist on the line            
                 let text = '';
                 let version = ++didChangeTextDocument_version;

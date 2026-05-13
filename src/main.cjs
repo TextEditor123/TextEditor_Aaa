@@ -171,7 +171,8 @@ const createWindow = () => {
   });
 
   ipcMain.handle('did-change-text-document-notification', async (event, absolutePath, version, startLine, startCharacter, endLine, endCharacter, text) => {
-	  absolutePath = formatAbsolutePath(absolutePath);
+	  // renderer now gives the formatted path
+	  //absolutePath = formatAbsolutePath(absolutePath);
 	
       if (openedDocumentUri !== absolutePath) return;
 
@@ -256,9 +257,15 @@ const createWindow = () => {
       if(!isValidAbsolutePath(absolutePath)) return;
 
       try {
+		  let basename = path.basename(absolutePath);
+
 		  let itHasBom = hasBOM(absolutePath);
 
 		  absolutePath = formatAbsolutePath(absolutePath);
+		  itHasBom.formattedAbsolutePath = absolutePath;
+
+		  let pathId = database.addAbsolutePath(itHasBom.formattedAbsolutePath, basename);
+
 		  if (openedDocumentUri) {
 			let tdIdentifier = MAIN_message_construct_textDocumentIdentifier(absolutePath);
 			if (languageServerHandshakeSuccess && languageServer) {
@@ -1941,6 +1948,9 @@ sec0*/
     - [ ] the first thing this does is:
         - [ ] absolutePath = formatAbsolutePath(absolutePath);
         - [ ] consider storing in renderer process the formatted absolute path so you don't have to do this everytime?
+	- [ ] The solution currently is adding another string to the renderer so it is a BAD solution
+	- [ ] But this code has to be written first in order to get a final solution or just even do it for the
+	    sake of crossing this off and saying I tried but it isn't worth or like literally anything
 
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
