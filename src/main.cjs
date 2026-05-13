@@ -1902,3 +1902,8 @@ function hasBOM(filePath) {
   *//*
 //========
 sec0*/
+
+/*
+When you cache the bounding client rect, what properties do you actually end up using
+and would it be meaningful to instead store those individual properties instead.
+*/
