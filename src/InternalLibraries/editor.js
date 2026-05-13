@@ -109,6 +109,11 @@
  * 
  */
 
+const ExtensionKind = {
+    None: 0,
+    JavaScript: 1,
+};
+
 // DeleteLtr and BackspaceRtl are both forms of removing text,
 // their edits are stored the same (i.e.: both in "the form of a delete" keypress)
 // The kind delete/backspace tells you how to restore the cursor when doing a ctrl+z and etc...?

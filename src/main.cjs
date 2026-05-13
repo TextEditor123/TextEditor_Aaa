@@ -258,11 +258,13 @@ const createWindow = () => {
 
       try {
 		  let basename = path.basename(absolutePath);
+		  let extension = path.extname(absolutePath);
 
 		  let itHasBom = hasBOM(absolutePath);
 
 		  absolutePath = formatAbsolutePath(absolutePath);
 		  itHasBom.formattedAbsolutePath = absolutePath;
+		  itHasBom.extension = extension;
 
 		  let pathId = database.addAbsolutePath(itHasBom.formattedAbsolutePath, basename);
 
@@ -1951,6 +1953,11 @@ sec0*/
 	- [ ] The solution currently is adding another string to the renderer so it is a BAD solution
 	- [ ] But this code has to be written first in order to get a final solution or just even do it for the
 	    sake of crossing this off and saying I tried but it isn't worth or like literally anything
+
+- [ ] Enums that are strings optimization vs an int?
+    - Enums are "objects?" with named property to value mappings?
+	- this sounds extremely expensive for what it is?
+	- maybe it isn't as bad as it sounds
 
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
