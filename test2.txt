@@ -1,50 +1,24 @@
-The emotions come and go.
-The only long lasting effects are the impulsive actions we might take under the strain.
-Then spend the rest of our lives regretting.
-So things will change for the better I just need to not be stupid.
+# Over optimization, under optimization, intuition
 
-I want a playlist on youtube that reflects how I'm feeling so I can snapshot these feelings and look back
-and have proof of the change and the short term aspect of it all. And a reminder not to do anything in the moment.
+I want to try and explain some of my intuition for the
+recent optimization I did.
 
-I always feel the anxiety. For some reason the last few days it has been almost unbearable and I don't know why.
+I do not know whether my change is beneficial or not.
 
-I clicked onto a song just now.
-I saw the dislike count.
-This song has more than a million views.
+I need to get better at measuring things.
+I tend to avoid measuring things when working on my own projects
+and just go by the "feel" of things.
+This is because measuring is extremely difficult and often misleading.
+If I were making a change for someone else's code I'd
+want to have something more than just a "feeling".
+But nevertheless... I want to think about my decision.
 
-I think to myself "it has x amount of dislikes".
-It must've gained 5 dislikes in the last 30 minutes because everyone sees me listening to music.
-And they know what music I listen to.
-And they know I'm gonna click on this song.
-So they're disliking it because they hate me and they know me so well that they know I'll see this.
 
-Everyone has these little things they do to talk to me. And tell me that they hate me.
-And all the time I'm trying to filter these thoughts out.
-And they're intrustive all the time when I'm trying to just live.
 
-============
 
-There's not much to do.
-The worst thing is to on any given day do nothing.
-It's always the same task every day no matter what your goal is:
-- meaningfully fatigue yourself in a way that progresses you towards the goal, and sleep.
-That's the bare minimum.
-And if you meet that bare minimum, you ought to not feel anymore anxiety for the day.
 
-============
 
-Honestly idk what's wrong with you. You didn't do anything but it isn't bad progress
-and yet all in all I feel horrible.
-But... you never emptied the innerHTML. So your change is doing nothing yet.
 
-ugh you never removed the code that emptied the innerHTML... is what I mean to say...
-
-============
-
-I think I broke a ton of code I can't scroll all the text disappears lol
-Just the sheer amount of "ugh" and "omg" that I've been feeling
-and then I break all the code it kinda was comical timing in a way.
-I'm gonna fix it rq.
 
 
 
