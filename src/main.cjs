@@ -1979,6 +1979,8 @@ sec0*/
 
 - [ ] Get character when a pending edit needs to be fixed it isn't working.
 
+- [ ] Why does find all not work?
+
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
 
