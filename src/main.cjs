@@ -1918,6 +1918,7 @@ sec0*/
     - [ ] Instead of storing your numbers in a global scope you have a UInt...Array and put numbers in there.
     - [ ] Then to access the previous number variable you instead access the UInt...Array at some hardcoded index that represents the variable.
     - [ ] (the datatypes of number and uint... are not equivalent, but this presumes there is a valid conversion between them given the use case.
+    - [ ] And sure the global scope might not be ideal but many of my use cases are currently exactly this cause I'm still class-encapsulating the logic.
 
 - [ ] More multicursor progress
 */
