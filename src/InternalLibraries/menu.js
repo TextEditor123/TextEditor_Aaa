@@ -54,7 +54,7 @@ class MenuOption {
  * TODO: Why am I separating 'menuSet' and 'menuShow'?
  */
 function menuShow() {
-    let menu = document.getElementById('MENU');
+    const menu = document.getElementById('MENU');
 
     if (menu.style.visibility !== '') {
         menu.style.visibility = '';
@@ -62,8 +62,8 @@ function menuShow() {
 }
 
 function menuHide(shouldRestoreFocus) {
-    let menu = document.getElementById('MENU');
-    let optionListElement = document.getElementById('MENU_optionList');
+    const menu = document.getElementById('MENU');
+    const optionListElement = document.getElementById('MENU_optionList');
     if (menu.style.visibility !== 'hidden') {
         menu.style.visibility = 'hidden';
         optionListElement.innerHTML = '';
@@ -106,8 +106,8 @@ function menuSet(context, target, optionList, left, top, NOTshouldFocus, index) 
     //
     // And invalidate the cache under certain scenarios.
     //
-    let menuElement = document.getElementById('MENU');
-    let optionListElement = document.getElementById('MENU_optionList');
+    const menuElement = document.getElementById('MENU');
+    const optionListElement = document.getElementById('MENU_optionList');
     
     menuShow();
     menuElement.style.left = left + 'px';
@@ -117,8 +117,8 @@ function menuSet(context, target, optionList, left, top, NOTshouldFocus, index) 
     optionListElement.innerHTML = '';
 
     for (var i = 0; i < MENU_optionList.length; i++) {
-        let entry = MENU_optionList[i];
-        let optionElement = document.createElement('div');
+        const entry = MENU_optionList[i];
+        const optionElement = document.createElement('div');
         optionElement.className = 'menuOption';
         optionElement.innerText = entry.text;
 
@@ -147,6 +147,14 @@ let recentBoundingClientRect_ID = null;
 
 let MENU_onMouseMove_timer = null;
 let MENU_onMouseMove_event = null;
+
+// Google AI Overview for "javascript is a const local function created recreated every invocation of the parent" paraphrased:
+// ```
+// Yes, in JavaScript, a function declared with const inside another function is re-created every time the parent function is called.
+// Because it is a new scope, a fresh const identifier is created for each invocation, holding a new reference, even though the behavior remains the same.
+// ```
+//
+// I think my worry is const is that it is making a "static" variable that always exists. It seems to be recreated everytime you get the scope.
 
 function MENU_onMouseMove_WRAPIT(event) {
 	const timeoutFunc = () => {
