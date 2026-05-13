@@ -60,6 +60,9 @@ The code that draws a line of text:
 
 https://github.com/TextEditor123/TextEditor_Aaa/blob/master/src/InternalLibraries/editor.js#L5319
 function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
+	// Every line of text is represented by a:
+	// - div
+	//     - (at least one) <span> that has its innerText set to the text to display for that line.
 	if (/*the line of text is empty*/) {
 		// draw an empty line of text on the UI
 	}
