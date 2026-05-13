@@ -1990,6 +1990,8 @@ sec0*/
 	- Constant Folding and Propagation
 	- Escape Analysis
 
+- [ ] I was wondering about this once I forgot a keyword and my code was still working: Accidental globals (variables declared without a keyword)
+
 // I have an edm song playing and I've just been staring at the music video the lyrics are pretty good something like "badadabeepadoooo"
 // and no nothing that is related to what I'm watching shows up when you google that.
 
