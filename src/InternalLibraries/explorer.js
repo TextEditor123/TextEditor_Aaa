@@ -1,30 +1,3 @@
-// TODO: reduce the count of live objects by creating local variables to the children of explorerElement...
-// ...via variable defined constants that say the index for the respective element in the explorerElement.children list that you'd find the element.
-// And have the first ... children be conventionally known to be hardcoded indices at which they reside.
-const EXPLORER_Element = document.getElementById('EXPLORER');
-const EXPLORER_PickFolder = document.getElementById('EXPLORER_pickFolder');
-
-const EXPLORER_isExpandedText = '-';
-const EXPLORER_NOTisExpandedText = '+';
-const EXPLORER_cannotBeExpandedText = '';
-
-/** Pixels */
-const EXPLORER_offsetPerDepth = 8;
-
-let EXPLORER_show = true;
-
-/** 8 */
-let EXPLORER_firstSpanWidthValue = 8;
-/** 8px */
-let EXPLORER_firstSpanWidth = 8;
-
-let menuOptionX = 0;
-let menuOptionY = 0;
-
-let EXPLORER_menuOptionCut_object = null;
-
-let EXPLORER_treeViewComponent = new TreeViewComponent();
-
 class EXPLORER_TreeViewDirector {
 
     constructor() {
@@ -367,6 +340,33 @@ class EXPLORER_TreeViewDirector {
         return this.flatList.count_abstract;
     }
 }
+
+// TODO: reduce the count of live objects by creating local variables to the children of explorerElement...
+// ...via variable defined constants that say the index for the respective element in the explorerElement.children list that you'd find the element.
+// And have the first ... children be conventionally known to be hardcoded indices at which they reside.
+const EXPLORER_Element = document.getElementById('EXPLORER');
+const EXPLORER_PickFolder = document.getElementById('EXPLORER_pickFolder');
+
+const EXPLORER_isExpandedText = '-';
+const EXPLORER_NOTisExpandedText = '+';
+const EXPLORER_cannotBeExpandedText = '';
+
+/** Pixels */
+const EXPLORER_offsetPerDepth = 8;
+
+let EXPLORER_show = true;
+
+/** 8 */
+let EXPLORER_firstSpanWidthValue = 8;
+/** 8px */
+let EXPLORER_firstSpanWidth = 8;
+
+let menuOptionX = 0;
+let menuOptionY = 0;
+
+let EXPLORER_menuOptionCut_object = null;
+
+let EXPLORER_treeViewComponent = new TreeViewComponent();
 
 let EXPLORER_director = new EXPLORER_TreeViewDirector();
 

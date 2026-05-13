@@ -992,6 +992,45 @@ EDITOR_drawHorizontalScrollbar();
 
 EDITOR_registerHandlers();
 
+let EDITOR_onMouseMove_timer = null;
+let EDITOR_onMouseMove_event = null;
+
+let didChangeTextDocumentNotificationPromise = null;
+/**
+ * Prevent earlier members of a then chain from marking didChangeTextDocumentNotificationPromise to null
+ * in order to signify resolved
+ * 
+ * when meanwhile there is more promises in the .then chain that need to resolve.
+ * 
+ * prefix increment
+ */
+let ticket_didChangeTextDocumentNotificationPromise = 0;
+let didChangeTextDocument_version = 0;
+
+/**
+ * All the 'EDITOR_cursorList' loops are currently using the variable 'i'.
+ * I'm experimenting with a few of the loops though such that at the start of every loop they set this variable equal to 'i'.
+ * Then in any functions like getCharacter, I might be able to contextually find the character much faster.
+ * */
+let EDITOR_indexCursor = 0;
+let EDITOR_offsetLine = 0;
+let EDITOR_offsetColumn_withRespectToThisIndexLine = 0;
+let EDITOR_offsetColumn = 0;
+let EDITOR_totalShift = 0;
+
+let EDITOR_findOverlay_wasSearched = false;
+
+let EDITOR_findOverlay_options_matchWord = false;
+
+let EDITOR_onResize_timer = null;
+let EDITOR_onResize_bool = null;
+
+let EDITOR_ONSCROLLvirtualLineIndex = -1;
+let EDITOR_ONSCROLLvirtualCount = -1;
+let EDITOR_ONSCROLLscrollTop = -1;
+let EDITOR_timer = null;
+let EDITOR_onScroll_bool = false;
+
 /**
  * @param {*} indexLine
  * @returns {number} the last valid POSITION index on the line, but with respect to any pending edits.
@@ -1923,9 +1962,6 @@ function EDITOR_measureLineHeightAndCharacterWidth() {
     EDITOR_textElement.removeChild(measureElement);
 }
 
-let EDITOR_onMouseMove_timer = null;
-let EDITOR_onMouseMove_event = null;
-
 // TODO: Probably shouldn't duplicate this throttle code, it is in 'menu.js' too.
 //
 // Google AI overview for "javascript throttle trailing edge" generated this code:
@@ -2599,18 +2635,6 @@ function EDITOR_NOTcanBatch_delete(cursor) {
            cursor.hasSelection();
 }
 
-let didChangeTextDocumentNotificationPromise = null;
-/**
- * Prevent earlier members of a then chain from marking didChangeTextDocumentNotificationPromise to null
- * in order to signify resolved
- * 
- * when meanwhile there is more promises in the .then chain that need to resolve.
- * 
- * prefix increment
- */
-let ticket_didChangeTextDocumentNotificationPromise = 0;
-let didChangeTextDocument_version = 0;
-
 /**
  * javascript is single threaded, if this does end up working, don't repeat this in other languages, runtimes, etc... without care.
  * Also I looked at all the async logic and believe everything is in proper timing. This pattern perhaps would break if an await where added somewhere in a critical section?
@@ -3146,17 +3170,6 @@ function EDITOR_movementBasedCacheInvalidation() {
     EDITOR_cached_indentation_string = null;
     EDITOR_findOverlay_isBeingShownDueToMultiCursorMatching = false;
 }
-
-/**
- * All the 'EDITOR_cursorList' loops are currently using the variable 'i'.
- * I'm experimenting with a few of the loops though such that at the start of every loop they set this variable equal to 'i'.
- * Then in any functions like getCharacter, I might be able to contextually find the character much faster.
- * */
-let EDITOR_indexCursor = 0;
-let EDITOR_offsetLine = 0;
-let EDITOR_offsetColumn_withRespectToThisIndexLine = 0;
-let EDITOR_offsetColumn = 0;
-let EDITOR_totalShift = 0;
 
 function EDITOR_editEvent(editKind, event) {
     // check for pending => selection
@@ -3838,8 +3851,6 @@ function EDITOR_registerHandlers() {
     });
 }
 
-let EDITOR_findOverlay_wasSearched = false;
-
 function EDITOR_findOverlay_doSearch() {
 	let input = document.getElementById('EDITOR_findOverlay_input_elementId');
     if (!input || !input.value) return;
@@ -4012,8 +4023,6 @@ function EDITOR_findOverlay_checkboxMatchWord_onchange() {
     	EDITOR_findOverlay_doSearch();
     }
 }
-
-let EDITOR_findOverlay_options_matchWord = false;
 
 function EDITOR_findOverlay_showSetter(showValue) {
     EDITOR_finalizeAllCursors();
@@ -5091,9 +5100,6 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
     }
 }
 
-let EDITOR_onResize_timer = null;
-let EDITOR_onResize_bool = null;
-
 function EDITOR_onResize_WRAPIT() {
     const timeoutFunc = () => {
         if (/*trailing && lastArgs*/ EDITOR_onResize_bool) {
@@ -5139,12 +5145,6 @@ function EDITOR_drawHorizontalScrollbar() {
         EDITOR_horizontal_scrollbar.scrollLeft = EDITOR_baseElement.scrollLeft;
     }
 }
-
-let EDITOR_ONSCROLLvirtualLineIndex = -1;
-let EDITOR_ONSCROLLvirtualCount = -1;
-let EDITOR_ONSCROLLscrollTop = -1;
-let EDITOR_timer = null;
-let EDITOR_onScroll_bool = false;
 
 function EDITOR_onScroll_WRAPIT() {
 	EDITOR_onScroll_bool = true;

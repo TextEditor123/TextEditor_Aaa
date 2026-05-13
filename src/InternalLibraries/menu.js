@@ -1,11 +1,3 @@
-let MENU_context = null;
-let MENU_target = null;
-let MENU_restoreFocusToElement = null;
-let MENU_optionList = [];
-let MENU_cursorIndex = 0;
-
-const MENU_optionListElement = document.getElementById('MENU_optionList');
-
 const CommandKind = {
   None: 0,
   Submenu: 1,
@@ -48,6 +40,24 @@ class MenuOption {
     }
 }
 
+const menuElement = document.getElementById('MENU');
+
+let recentBoundingClientRect = null;
+/**
+ * TODO: You need to move this to 'MENU_onMouseMove_WRAPIT(...)' and pass it to 'MENU_onMouseMove' in some way that remembers the state during the throttle or whatever I can't word it right now but I understand that it is wrong and why it is but I'm too tired to write the fix.
+ */
+let recentBoundingClientRect_ID = null;
+
+let MENU_onMouseMove_timer = null;
+let MENU_onMouseMove_event = null;
+
+let MENU_context = null;
+let MENU_target = null;
+let MENU_restoreFocusToElement = null;
+let MENU_optionList = [];
+let MENU_cursorIndex = 0;
+
+const MENU_optionListElement = document.getElementById('MENU_optionList');
 
 /**
  * You probably want to use 'menuSet', not this method.
@@ -139,25 +149,6 @@ function menuSet(context, target, optionList, left, top, NOTshouldFocus, index) 
         menuElement.focus();
     }
 }
-
-const menuElement = document.getElementById('MENU');
-
-let recentBoundingClientRect = null;
-/**
- * TODO: You need to move this to 'MENU_onMouseMove_WRAPIT(...)' and pass it to 'MENU_onMouseMove' in some way that remembers the state during the throttle or whatever I can't word it right now but I understand that it is wrong and why it is but I'm too tired to write the fix.
- */
-let recentBoundingClientRect_ID = null;
-
-let MENU_onMouseMove_timer = null;
-let MENU_onMouseMove_event = null;
-
-// Google AI Overview for "javascript is a const local function created recreated every invocation of the parent" paraphrased:
-// ```
-// Yes, in JavaScript, a function declared with const inside another function is re-created every time the parent function is called.
-// Because it is a new scope, a fresh const identifier is created for each invocation, holding a new reference, even though the behavior remains the same.
-// ```
-//
-// I think my worry is const is that it is making a "static" variable that always exists. It seems to be recreated everytime you get the scope.
 
 function MENU_onMouseMove_WRAPIT(event) {
 	const timeoutFunc = () => {

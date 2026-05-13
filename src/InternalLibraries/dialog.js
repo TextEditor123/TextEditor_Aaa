@@ -30,6 +30,12 @@ let DIALOG_before_Y = 0;
 let DIALOG_after_X = 0;
 let DIALOG_after_Y = 0;
 
+let DIALOG_FindAll_options_matchWord = false;
+
+let DIALOG_Settings_isDark = true;
+let DIALOG_Settings_trueTabs_falseSpaces = true;
+let DIALOG_Settings_editorDebugShowAdjacentCharacters = false;
+
 const DIALOG_minTop = 8;
 const DIALOG_minLeft = 8;
 const DIALOG_minHeight = 100;
@@ -622,8 +628,6 @@ function DIALOG_deleteWindow() {
     DIALOG_element.innerHTML = '';
 }
 
-let DIALOG_FindAll_options_matchWord = false;
-
 async function DIALOG_FindAll_Create_async() {
     let dialogBody = document.getElementById('DIALOG_body');
 
@@ -825,10 +829,6 @@ async function position_pseudoonclick(element, searchResultsDiv, yIndex) {
 
     EDITOR_moveCursor_position(intValue);
 }
-
-DIALOG_Settings_isDark = true;
-DIALOG_Settings_trueTabs_falseSpaces = true;
-DIALOG_Settings_editorDebugShowAdjacentCharacters = false;
 
 async function DIALOG_Settings_Create_async() {
     let dialogBody = document.getElementById('DIALOG_body');
