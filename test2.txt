@@ -13,7 +13,51 @@ If I were making a change for someone else's code I'd
 want to have something more than just a "feeling".
 But nevertheless... I want to think about my decision.
 
+- Incremental optimization
+- Garbage collection red flags
+- Localized overhead vs appwide
 
+The scroll event:
+
+https://github.com/TextEditor123/TextEditor_Aaa/blob/master/src/InternalLibraries/editor.js#L5132
+function EDITOR_onScroll_WRAPIT() {
+	// throttle EDITOR_onScroll()
+}
+
+https://github.com/TextEditor123/TextEditor_Aaa/blob/master/src/InternalLibraries/editor.js#L5159
+function EDITOR_onScroll() {
+	if (countLinesOfTextBeingShown === theAmountOfLinesThatShouldBeShownGivenTheViewportHeight) {
+		if (/*the user scrolled to a larger scrollTop*/) {
+			// re-use the 0th index line of text that is being displayed
+			// - replace its text with the text that ought to show at the newly scrolled into view index
+			// - move the index of that 0th index line to be the final line of text that is being displayed
+			// repeat this for as many lines of text that came into view
+			return;
+		}
+		else if (/*the user scrolled to a smaller scrollTop*/) {
+			// re-use the (countLinesOfTextBeingShown - 1) index line of text
+			// - replace its text with the text that ought to show at the newly scrolled into view index
+			// - move the index of that (countLinesOfTextBeingShown - 1) index line to be the first line of text that is being displayed
+			// repeat this for as many lines of text that came into view
+			return;
+		}
+		else {
+			// This is where the previous 'if' and 'else if' are somewhat misleading.
+			// If you scroll so far in either direction such that ALL lines of text need to be replaced,
+			// then this code will trigger.
+			//
+			// foreach line of text that is being displayed
+			// - replace its text with the text that ought to show at that newly scrolled into view index
+			return;
+		}
+	}
+	else {
+		// the viewport height was changed
+		// currently the solution here is very unoptimized.
+		// I believe I completely throw away the current UI
+		// and redraw it from scratch.
+	}
+}
 
 
 
