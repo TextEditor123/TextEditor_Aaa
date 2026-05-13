@@ -1997,4 +1997,7 @@ I gotta go for a walk soon.
 I'm trying to think if I did enough but I don't feel like any of the tasks were actually completed they were all just "progress was made here"'d.
 I'm trying to think if that many "progress was made here"'d sums to something meaningful.
 I think it does at a glance but I don't wanna unintentionally go easy on myself.
+
+the task for - [/] 'did-change-text-document-notification'
+- I added a string to the renderer, but I know I also as I was looking through the code removed a pointless global allocation so it evens out without me having to even think about the other things I've done not that I wouldn't consider them I'm just saying I wouldn't even have to if I wanted to even it out.
 */
