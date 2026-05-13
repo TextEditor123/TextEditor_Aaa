@@ -1930,29 +1930,28 @@ let EDITOR_onMouseMove_event = null;
 //
 // Google AI overview for "javascript throttle trailing edge" generated this code:
 function EDITOR_onMouseMove_WRAPIT(event) {
-
-	const timeoutFunc = () => {
-        if (/*trailing && lastArgs*/ EDITOR_onMouseMove_event) {
-            EDITOR_onMouseMove(EDITOR_onMouseMove_event);
-            EDITOR_onMouseMove_event = null;
-            EDITOR_onMouseMove_timer = setTimeout(timeoutFunc, 90);
-        } else {
-            EDITOR_onMouseMove_timer = null;
-        }
-    };
-
-	if (event.buttons & 1 && EDITOR_isSourceOfLeftMouseButton) {
+    if (event.buttons & 1 && EDITOR_isSourceOfLeftMouseButton) {
 		EDITOR_onMouseMove_event = event;
 		
 	    if (!EDITOR_onMouseMove_timer) {
 	        if (true /*options.leading*/) {
 	            EDITOR_onMouseMove(event);
 	        }
-	        EDITOR_onMouseMove_timer = setTimeout(timeoutFunc, 90);
+	        EDITOR_onMouseMove_timer = setTimeout(EDITOR_onMouseMove_timeoutFunc, 90);
 	    }
     }
     else {
         EDITOR_isSourceOfLeftMouseButton = false;
+    }
+}
+
+function EDITOR_onMouseMove_timeoutFunc() {
+    if (/*trailing && lastArgs*/ EDITOR_onMouseMove_event) {
+        EDITOR_onMouseMove(EDITOR_onMouseMove_event);
+        EDITOR_onMouseMove_event = null;
+        EDITOR_onMouseMove_timer = setTimeout(EDITOR_onMouseMove_timeoutFunc, 90);
+    } else {
+        EDITOR_onMouseMove_timer = null;
     }
 }
 
