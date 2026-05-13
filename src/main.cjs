@@ -2028,4 +2028,5 @@ Google AI Overview for "javascript is invoking a function via a variable referen
 I think I'd always thought that but... I'm extremely tired idk what I'm trying to say.
 It is interesting to read it from somewhere else, it's crossed my mind before.
 *Presumably is a pre-optimization 99.999% of the time idk, interesting nevertheless
+*also due to engine optimizations it might be a pre-optimization 100% of the time due to that code otherwise having been inlined or some kind of caching of things
 */
