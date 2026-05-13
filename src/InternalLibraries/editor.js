@@ -5147,23 +5147,23 @@ let EDITOR_timer = null;
 let EDITOR_onScroll_bool = false;
 
 function EDITOR_onScroll_WRAPIT() {
-	const timeoutFunc = () => {
-        if (/*trailing && lastArgs*/ EDITOR_onScroll_bool) {
-            EDITOR_onScroll();
-            EDITOR_onScroll_bool = false;
-            EDITOR_timer = setTimeout(timeoutFunc, 100);
-        } else {
-            EDITOR_timer = null;
-        }
-    };
-
 	EDITOR_onScroll_bool = true;
 	
     if (!EDITOR_timer) {
         if (true /*options.leading*/) {
             EDITOR_onScroll();
         }
-        EDITOR_timer = setTimeout(timeoutFunc, 100);
+        EDITOR_timer = setTimeout(EDITOR_onScroll_timeoutFunc, 100);
+    }
+}
+
+function EDITOR_onScroll_timeoutFunc() {
+    if (/*trailing && lastArgs*/ EDITOR_onScroll_bool) {
+        EDITOR_onScroll();
+        EDITOR_onScroll_bool = false;
+        EDITOR_timer = setTimeout(EDITOR_onScroll_timeoutFunc, 100);
+    } else {
+        EDITOR_timer = null;
     }
 }
 
