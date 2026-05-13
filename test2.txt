@@ -215,3 +215,7 @@ and you abandon the project.
 I think deeply about my good code.
 And I think deeply about my bad code.
 They are all a means to an end that I have mapped out years ahead of time.
+
+When I wrote the original code I knew I would get to this far more optimized way.
+Because I understand understanding itself.
+Forget the code.
