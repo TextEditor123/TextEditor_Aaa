@@ -1950,4 +1950,8 @@ So I would actually like to do that because I feel some degree of a desire to pr
 That's essentially my number 1 way to measure productivity for the day.
 Is what I accomplished something that would typically cause me to feel a desire to procrastinate.
 I don't want to just sit here and type out bulk things all the time it kind of is pointless.
+It isn't entirely pointless... but you probably get what I'm saying, I want to do something that is uncomfortable because
+I have a daily bank of stress resilience that I'd like to deplete a bit because it is time gated I can't just
+avoid stress and accrue an infinite amount of stress resilience over time there is a cap so I need to
+incur stress responsibly on a day to day basis to keep everything manageable.
 */
