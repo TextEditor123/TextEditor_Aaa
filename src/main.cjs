@@ -2061,4 +2061,10 @@ and they all took the same arguments.
 Then it'd be possible faster in those sections by skipping the variable lookup for EDITOR_extensionKind and skipping the switch entirely.
 
 The default case would then need its own lex function though.
+
+If I do document.getElementById(...) prior to that, could an HTML element be shown in the UI
+without having allocated that HTMLElement object or whatever it is?
+Am I causing an allocation to exist that otherwise could be avoided by holding a reference to it?
+If the allocation already happened regardless then simply holding a reference to an existing object
+wouldn't be nearly as bad as causing an object to exist that otherwise wouldn't.
 */
