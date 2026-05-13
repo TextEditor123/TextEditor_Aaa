@@ -2067,4 +2067,6 @@ without having allocated that HTMLElement object or whatever it is?
 Am I causing an allocation to exist that otherwise could be avoided by holding a reference to it?
 If the allocation already happened regardless then simply holding a reference to an existing object
 wouldn't be nearly as bad as causing an object to exist that otherwise wouldn't.
+
+It seems to be a reference to an already existing object
 */
