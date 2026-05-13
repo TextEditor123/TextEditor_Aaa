@@ -2010,4 +2010,10 @@ goal and suddenly I'm over the moon and can go all day without even trying
 but it emphasizes the idea that you gotta just get started
 because your mood at the start isn't necessarily going to be your mood the entire session).
 
+=========
+
+I constantly feel like I don't want to do this anymore.
+I want to just play videogames is all I can think while I'm sitting here and I spend hours just sitting here with the code
+open and I'm staring at it and I'm getting NOTHING done. It is so frustrating.
+
 */
