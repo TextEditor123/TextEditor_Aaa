@@ -2031,4 +2031,6 @@ It is interesting to read it from somewhere else, it's crossed my mind before.
 *also due to engine optimizations it might be a pre-optimization 100% of the time due to that code otherwise having been inlined or some kind of caching of things
 
 I am considering the difference in magnitude between global scope and a class instance.
+With respect to resolving identifiers. And possibly it coming into play there more
+because that is the greatest difference of magnitude you'll probably encounter.
 */
