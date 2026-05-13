@@ -2011,4 +2011,8 @@ If I reason about that from my code's perspective.
 It would mean the multiline comments that span multiple lines (or the full lex) is done by the LSP
 so when you first open the file, vscode is lexing the text itself but it just doesn't handle multiline snytax that spans multiple lines
 similar to how I'm doing it?
+
+I just made another youtube playlist and I think I get why I do it.
+I think I am just vibing to a song and it makes me wanna make a public playlist.
+I think I'm lonely.
 */
