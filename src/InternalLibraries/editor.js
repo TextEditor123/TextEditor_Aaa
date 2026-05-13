@@ -7890,6 +7890,7 @@ function EDITOR_language_line_lex_SET(extensionKind) {
  * ...I'm more concerned with tightening the difference between best and worst case...
  * ...by reducing worst case.
  * This makes line lexing JS faster so it is preferable even if I don't write this plaintext implementation perfectly.
+ * "maybe" it's faster I didn't measure anything but I swear I know what I'm doing
  */
 function PLAINTEXT_line_lex(div, substart, lineEnd, childIndex) {
     let length = 0;
