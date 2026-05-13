@@ -1923,6 +1923,11 @@ sec0*/
 - [ ] More multicursor progress
 
 - [ ] Determine how you will change the lexer for various file extensions.
+    - [ ] Is doing this immediately via the file extension reasonable?
+    - [ ] I think so...
+        - [ ] so then how do you have the renderer process determine the file extension?
+        - [ ] Is the I think it is 'path' is this available in the renderer process?
+        - [ ] Also investigate why you have confusion about whether the renderer process would or would not have access to 'path'.
 
 - [ ] A completely in-memory file then save-as
 - [ ] save-as but for any file
