@@ -393,22 +393,21 @@ class TreeViewComponent {
     }
 
     async event_scroll_async_WRAPIT() {
-        const timeoutFunc = async () => {
-	        if (/*trailing && lastArgs*/ this.event_scroll_async_bool) {
-	            await this.event_scroll_async();
-	            this.event_scroll_async_bool = false;
-	            this.event_scroll_async_timer = setTimeout(timeoutFunc, 100);
-	        } else {
-	            this.event_scroll_async_timer = null;
-	        }
-	    };
-	
-		this.event_scroll_async_bool = true;
-		
+        this.event_scroll_async_bool = true;
 	    if (!this.event_scroll_async_timer) {
 	    	await this.event_scroll_async();
-	        this.event_scroll_async_timer = setTimeout(timeoutFunc, 100);
+	        this.event_scroll_async_timer = setTimeout(event_scroll_async_timeoutFunc, 100);
 	    }
+    }
+    
+    async event_scroll_async_timeoutFunc() {
+        if (/*trailing && lastArgs*/ this.event_scroll_async_bool) {
+            await this.event_scroll_async();
+            this.event_scroll_async_bool = false;
+            this.event_scroll_async_timer = setTimeout(event_scroll_async_timeoutFunc, 100);
+        } else {
+            this.event_scroll_async_timer = null;
+        }
     }
 
     async event_scroll_async() {
