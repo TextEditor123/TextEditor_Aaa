@@ -1937,4 +1937,6 @@ I'm not feeling well, I'm trying to figure out how I can make any semblence of p
 That's why I'm trying to visualize the tasks in my mind by typing them out.
 It is good no matter what. But especially at the moment because I "feel" like I can't do anything.
 Not from a skill perspective but I just am sitting here like "ugh"
+
+So I need to determine what a meaningful amount of progress for the day would be.
 */
