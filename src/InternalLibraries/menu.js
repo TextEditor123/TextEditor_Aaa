@@ -177,14 +177,15 @@ function MENU_onMouseMove_WRAPIT(event) {
 
 // TODO: I know this kinda is a mess but I'm all over the place right now and just trying to force some progress
 function MENU_onMouseMove(event) {
-	let local_recentBoundingClientRect_ID = recentBoundingClientRect_ID;
+    // wtf is this code doing lol? It is single threaded
+	const local_recentBoundingClientRect_ID = recentBoundingClientRect_ID;
     if (local_recentBoundingClientRect_ID != recentBoundingClientRect_ID)
         return;
     if (!recentBoundingClientRect) {
         recentBoundingClientRect = MENU_optionListElement.getBoundingClientRect();
     }
     
-    let { indexClicked, elementClicked } = menuGetRelativeMouseEventData(event, recentBoundingClientRect.top, MENU_optionListElement);
+    const { indexClicked, elementClicked } = menuGetRelativeMouseEventData(event, recentBoundingClientRect.top, MENU_optionListElement);
     MENU_setCursorIndex(indexClicked);
 }
 
