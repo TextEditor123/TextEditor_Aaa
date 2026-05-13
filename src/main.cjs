@@ -2033,4 +2033,32 @@ It is interesting to read it from somewhere else, it's crossed my mind before.
 I am considering the difference in magnitude between global scope and a class instance.
 With respect to resolving identifiers. And possibly it coming into play there more
 because that is the greatest difference of magnitude you'll probably encounter.
+
+I don't like how the https://github.com/TextEditor123/TextEditor_Aaa/blob/master/src/InternalLibraries/editor.js#L5371:
+```js
+function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
+	// ...
+	switch (EDITOR_extensionKind) {
+		case ExtensionKind.JavaScript:
+			// ...
+			childIndex = JS_line_lex(div, substart, subend, childIndex);
+			// ...
+			break;
+		default:
+			// ...
+			break;
+	}
+	// ...
+}
+```
+
+has to find the EDITOR_extensionKind variable and then switch over its value.
+To furthermore go on to invoke some language specific function.
+
+If the code that set EDITOR_extensionKind set EDITOR_extensionLexFunction to point to
+JS_line_lex
+and they all took the same arguments.
+Then it'd be possible faster in those sections by skipping the variable lookup for EDITOR_extensionKind and skipping the switch entirely.
+
+The default case would then need its own lex function though.
 */
