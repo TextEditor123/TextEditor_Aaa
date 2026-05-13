@@ -2017,4 +2017,14 @@ I think I am just vibing to a song and it makes me wanna make a public playlist.
 I think I'm lonely.
 
 Alright I privated the 2026-05-13_2 playlist don't worry.
+
+Google AI Overview for "javascript is invoking a function via a variable reference slower than using the function identifier itself" an interesting note:
+```
+- Scope Depth:
+    - Accessing a variable or function in the local scope is faster than one in the global scope because the engine has to search through fewer "layers"
+	  of the scope chain.
+```
+
+I think I'd always thought that but... I'm extremely tired idk what I'm trying to say.
+It is interesting to read it from somewhere else, it's crossed my mind before.
 */
