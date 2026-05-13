@@ -1939,4 +1939,15 @@ It is good no matter what. But especially at the moment because I "feel" like I 
 Not from a skill perspective but I just am sitting here like "ugh"
 
 So I need to determine what a meaningful amount of progress for the day would be.
+
+I have other tasks too... I don't know if I want to write them down because all in all they're maybe... I guess I'm not focused on them right now but I'm aware.
+It sort of comes down to "most of these I am 100% I can get something going but it is because I've already done it before"
+So do I really want to write another scroll line of text into view and then lex the line.
+Ehh I already know how to do that, and maybe I'll decide later that I don't even like the idea anymore.
+That being said I "feel" uneasy about the idea of switching between lexers based on the file extension or something.
+So I would actually like to do that because I feel some degree of a desire to procrastinate when I think about it.
+
+That's essentially my number 1 way to measure productivity for the day.
+Is what I accomplished something that would typically cause me to feel a desire to procrastinate.
+I don't want to just sit here and type out bulk things all the time it kind of is pointless.
 */
