@@ -1991,4 +1991,10 @@ sec0*/
 	- Escape Analysis
 
 - [ ] I was wondering about this once I forgot a keyword and my code was still working: Accidental globals (variables declared without a keyword)
+
+I'm trying to make sense of what I did today.
+I gotta go for a walk soon.
+I'm trying to think if I did enough but I don't feel like any of the tasks were actually completed they were all just "progress was made here"'d.
+I'm trying to think if that many "progress was made here"'d sums to something meaningful.
+I think it does at a glance but I don't wanna unintentionally go easy on myself.
 */
