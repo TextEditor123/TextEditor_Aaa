@@ -1906,6 +1906,8 @@ sec0*/
 /*
 - [ ] When you cache the bounding client rect, what properties do you actually end up using
     and would it be meaningful to instead store those individual properties instead.
+        - [ ] Build intuition for how frequently getting bounding client rect can be invoked before you'd desire to cache it or its properties that you will use.
+        - [ ] i.e.: at what frequency of getBoundingClientRect do you decide to cache it or its properties that you will use.
     
 - [ ] Type a new multi-line comment, then make it span multiple lines, its syntax highlighting doesn't work unless you re-open the file.
 
