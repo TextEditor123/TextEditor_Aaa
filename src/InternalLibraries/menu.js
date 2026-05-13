@@ -151,21 +151,20 @@ function menuSet(context, target, optionList, left, top, NOTshouldFocus, index) 
 }
 
 function MENU_onMouseMove_WRAPIT(event) {
-	const timeoutFunc = () => {
-        if (/*trailing && lastArgs*/ MENU_onMouseMove_event) {
-            MENU_onMouseMove(MENU_onMouseMove_event);
-            MENU_onMouseMove_event = null;
-            MENU_onMouseMove_timer = setTimeout(timeoutFunc, 90);
-        } else {
-            MENU_onMouseMove_timer = null;
-        }
-    };
-
 	MENU_onMouseMove_event = event;
-	
     if (!MENU_onMouseMove_timer) {
     	MENU_onMouseMove(event);
-        MENU_onMouseMove_timer = setTimeout(timeoutFunc, 90);
+        MENU_onMouseMove_timer = setTimeout(MENU_onMouseMove_timeoutFunc, 90);
+    }
+}
+
+function MENU_onMouseMove_timeoutFunc(event) {
+    if (/*trailing && lastArgs*/ MENU_onMouseMove_event) {
+        MENU_onMouseMove(MENU_onMouseMove_event);
+        MENU_onMouseMove_event = null;
+        MENU_onMouseMove_timer = setTimeout(MENU_onMouseMove_timeoutFunc, 90);
+    } else {
+        MENU_onMouseMove_timer = null;
     }
 }
 

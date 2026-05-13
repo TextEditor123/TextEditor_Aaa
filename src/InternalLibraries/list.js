@@ -391,22 +391,23 @@ class ListComponent {
     }
     
     event_scroll_WRAPIT() {
-        const timeoutFunc = () => {
-	        if (/*trailing && lastArgs*/ this.event_scroll_bool) {
-	            this.event_scroll();
-	            this.event_scroll_bool = false;
-	            this.event_scroll_timer = setTimeout(timeoutFunc, 100);
-	        } else {
-	            this.event_scroll_timer = null;
-	        }
-	    };
-	
-		this.event_scroll_bool = true;
-		
+        this.event_scroll_bool = true;
 	    if (!this.event_scroll_timer) {
 	    	this.event_scroll();
-	        this.event_scroll_timer = setTimeout(timeoutFunc, 100);
+            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
+	        this.event_scroll_timer = setTimeout(event_scroll_timeoutFunc, 100);
 	    }
+    }
+    
+    event_scroll_timeoutFunc() {
+        if (/*trailing && lastArgs*/ this.event_scroll_bool) {
+            this.event_scroll();
+            this.event_scroll_bool = false;
+            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
+            this.event_scroll_timer = setTimeout(event_scroll_timeoutFunc, 100);
+        } else {
+            this.event_scroll_timer = null;
+        }
     }
     
     event_scroll() {

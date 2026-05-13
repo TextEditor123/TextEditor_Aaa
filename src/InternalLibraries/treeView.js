@@ -396,6 +396,7 @@ class TreeViewComponent {
         this.event_scroll_async_bool = true;
 	    if (!this.event_scroll_async_timer) {
 	    	await this.event_scroll_async();
+            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
 	        this.event_scroll_async_timer = setTimeout(event_scroll_async_timeoutFunc, 100);
 	    }
     }
@@ -404,6 +405,7 @@ class TreeViewComponent {
         if (/*trailing && lastArgs*/ this.event_scroll_async_bool) {
             await this.event_scroll_async();
             this.event_scroll_async_bool = false;
+            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
             this.event_scroll_async_timer = setTimeout(event_scroll_async_timeoutFunc, 100);
         } else {
             this.event_scroll_async_timer = null;
