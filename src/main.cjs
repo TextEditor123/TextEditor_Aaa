@@ -1959,4 +1959,6 @@ Not just that but even though discipline is important.
 There also is a degree of "I occassionally find enjoyment" that helps keep you doing something.
 I feel like garbage constantly but I take solace in the fact that I occassionally feel incredibly good while coding.
 And thus I'm willing to engage in discipline to mend the gaps between the varying moods.
+
+Right now I feel like garbage for example
 */
