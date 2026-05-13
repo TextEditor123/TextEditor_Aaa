@@ -1960,5 +1960,14 @@ There also is a degree of "I occassionally find enjoyment" that helps keep you d
 I feel like garbage constantly but I take solace in the fact that I occassionally feel incredibly good while coding.
 And thus I'm willing to engage in discipline to mend the gaps between the varying moods.
 
-Right now I feel like garbage for example
+Right now I feel like garbage for example.
+
+And the self perceived progress on any given day is very innacurrate.
+Just because you feel like garbage for the entirety of the time you coded that day,
+and other days you felt amazing while coding for the entirety of the time you coded that day.
+One of those coding sessions isn't necessarily more productive than the other.
+You need both moods at separate coding sessions in order to ground yourself
+and see the reality of things.
+You shouldn't skip out on a coding session because of your mood,
+every mood has its own pros and cons.
 */
