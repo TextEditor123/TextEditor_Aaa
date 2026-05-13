@@ -63,6 +63,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
 	// Every line of text is represented by a:
 	// - div
 	//     - (at least one) <span> that has its innerText set to the text to display for that line.
+	//         - *this is true even if the text is an empty string, at least one <span> will always exist
 	if (/*the line of text is empty*/) {
 		// draw an empty line of text on the UI
 	}
