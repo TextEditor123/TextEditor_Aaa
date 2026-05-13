@@ -1911,4 +1911,6 @@ sec0*/
 
 - [ ] What is the cost of document.getElementById(...)
     - [ ] Should a non-zero amount of scenarios where you cache this be changed to instead invoke the method to get the reference when needed.
+
+- [ ] More multicursor progress
 */
