@@ -2006,4 +2006,9 @@ the task for - [/] 'did-change-text-document-notification'
 wait that's very weird actually.
 I opened vscode and I it opened such that the scrollTop was showing the multiline comment that spans multiple lines which is just above this one.
 The entirety of the text showed almost like it was being lexed as JavaScript, then it became a comment syntax highlighting color.
+
+If I reason about that from my code's perspective.
+It would mean the multiline comments that span multiple lines (or the full lex) is done by the LSP
+so when you first open the file, vscode is lexing the text itself but it just doesn't handle multiline snytax that spans multiple lines
+similar to how I'm doing it?
 */
