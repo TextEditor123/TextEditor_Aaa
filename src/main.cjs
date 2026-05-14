@@ -2078,4 +2078,5 @@ Google AI Overview for "javascript span HTML element pooling" paraphrased:
 - Hide/Re-use: Use display: none to hide spans, and update textContent and styles to reuse them instead of removing them from the DOM.
 ^ that is so validating. When I was doing that display:none logic I kept putting a comment above it like ummm idk what I'm doing with this display:none stuff but it works.
 I totally get "AI psychosis" now. That was such a validating feeling like a nice warm hug I want another
+"source says the github repo TextEditor123/TextEditor_Aaa... that's odd"
 */
