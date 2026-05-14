@@ -2099,4 +2099,9 @@ of my life fixing things that don't cause that fear
 ...
 I'm gonna just single out one thing and then fix it.
 
+"add tabs"
+There is no point in doing that.
+
+I think everyone knows that multicursor is what to do next.
+everything else is just hiding
 */
