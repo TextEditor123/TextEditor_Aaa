@@ -2107,4 +2107,8 @@ everything else is just hiding
 
 A selection into { 'Shift' + 'Alt' + '>' } then typing non-enter-key and non-tab-key works surprising very well at the moment.
 I use it consistently myself without an issue.
+
+But I also just mentioned EXACTLY what I need to do then?
+- [ ] enter-key
+- [ ] tab-key
 */
