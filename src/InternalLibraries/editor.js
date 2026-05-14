@@ -3835,10 +3835,15 @@ function EDITOR_registerHandlers() {
     EDITOR_baseElement.addEventListener('mousedown', event => {
 
         EDITOR_movementBasedCacheInvalidation();
-
+        
         if (EDITOR_cursorList.length > 1) {
             EDITOR_finalizeAllCursors_andClearNonPrimaryCursors();
         }
+        
+        // TODO: You might want to do this inside 'EDITOR_finalizeAllCursors_andClearNonPrimaryCursors();' at the end... I'm not sure.
+        EDITOR_indexCursor = 0;
+        EDITOR_offsetColumn = 0;
+        EDITOR_offsetLine = 0;
 
         if (!EDITOR_recentBoundingClientRect) {
             EDITOR_recentBoundingClientRect = EDITOR_baseElement.getBoundingClientRect();
