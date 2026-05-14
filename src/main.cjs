@@ -2104,4 +2104,7 @@ There is no point in doing that.
 
 I think everyone knows that multicursor is what to do next.
 everything else is just hiding
+
+A selection into { 'Shift' + 'Alt' + '>' } then typing non-enter-key and non-tab-key works surprising very well at the moment.
+I use it consistently myself without an issue.
 */
