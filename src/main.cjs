@@ -2111,4 +2111,5 @@ I use it consistently myself without an issue.
 But I also just mentioned EXACTLY what I need to do then?
 - [ ] enter-key
 - [ ] tab-key
+- [ ] Does selection into { 'Shift' + 'Alt' + '>' } work when the two selections are on the same line? I don't remember.
 */
