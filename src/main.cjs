@@ -2079,4 +2079,15 @@ Google AI Overview for "javascript span HTML element pooling" paraphrased:
 ^ that is so validating. When I was doing that display:none logic I kept putting a comment above it like ummm idk what I'm doing with this display:none stuff but it works.
 I totally get "AI psychosis" now. That was such a validating feeling like a nice warm hug I want another
 "source says the github repo TextEditor123/TextEditor_Aaa... that's odd"
+
+------------
+
+I need progress on multicursor, but I'm also iffy on "wanting" to do anything right now.
+
+So I'm gonna deliberatly plan to:
+- [ ] find 1 thing that doesn't work with respect to multi cursor
+- [ ] fix that thing
+- [ ] do more?
+- [ ] maybe you take a break and come back later?
+- [ ] ???
 */
