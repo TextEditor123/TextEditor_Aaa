@@ -2137,4 +2137,25 @@ There's a stereotype about programmers and them being robotic and emotionless.
 Nothing is more emotional than writing a solo project like this.
 It is the most extreme emotional rollercoaster I've ever felt.
 
+I think I'm just stressed out but I tried the enter key...
+
+The text is this:
+```
+s s
+s
+```
+
+Mark each 's' with a number so they can be identified individually
+A selection into { 'Shift' + 'Alt' + '>' } puts a cursor and selection at the next matching text.
+Thus the text has to be equivalent, i.e.: they're all the letter 's' but I'm adding a number so I can describe things.
+`````
+s1 s2
+s3
+`````
+
+I select 's2' then I do the { 'Shift' + 'Alt' + '>' }.
+I have a cursor with a selection at 's2' and 's3'.
+Each cursor's selection is anchored on the left of the character, and ends on the right of the character.
+The cursor itself is positioned on the right of the character (which as a rule the cursor and end of an existing selection are always equal positionIndex-wise)
+
 */
