@@ -5421,7 +5421,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
             span.className = '';
 		}
 		else {
-			div.appendChild(EDITOR_span_rent());
+			div.appendChild(document.createElement('span'));
             childIndex++;
 		}
     }
@@ -5456,7 +5456,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                     //span.className = ''; className is guaranteed to be set in this specific case
 				}
 				else {
-					span = EDITOR_span_rent();
+					span = document.createElement('span');
                     div.appendChild(span);
                     childIndex++;
 				}
@@ -5492,7 +5492,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
 
     let aaa = div.children.length - childIndex;
     for (let i = 0; i < aaa; i++) {
-        EDITOR_span_return(div.children[childIndex]);
+        div.removeChild(div.children[childIndex]);
     }
 
     return trackedSyntax_I;
@@ -7942,7 +7942,7 @@ function PLAINTEXT_line_lex(div, substart, lineEnd, childIndex) {
             span.className = '';
         }
         else {
-            span = EDITOR_span_rent();
+            span = document.createElement('span');
             div.appendChild(span);
             childIndex++;
         }

@@ -698,7 +698,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                             span.className = '';
                         }
                         else {
-                            span = EDITOR_span_rent();
+                            span = document.createElement('span');
                             div.appendChild(span);
                             childIndex++;
                         }
@@ -713,7 +713,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -734,7 +734,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                             span.className = '';
                         }
                         else {
-                            span = EDITOR_span_rent();
+                            span = document.createElement('span');
                             div.appendChild(span);
                             childIndex++;
                         }
@@ -766,7 +766,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                             //span.className = ''; className is guaranteed to be set in this specific case
                         }
                         else {
-                            span = EDITOR_span_rent();
+                            span = document.createElement('span');
                             div.appendChild(span);
                             childIndex++;
                         }
@@ -787,7 +787,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                             span.className = '';
                         }
                         else {
-                            span = EDITOR_span_rent();
+                            span = document.createElement('span');
                             div.appendChild(span);
                             childIndex++;
                         }
@@ -835,7 +835,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -861,7 +861,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         span.className = '';
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -900,7 +900,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     //span.className = ''; className is guaranteed to be set in this specific case
                 }
                 else {
-                    span = EDITOR_span_rent();
+                    span = document.createElement('span');
                     div.appendChild(span);
                     childIndex++;
                 }
@@ -919,7 +919,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         span.className = '';
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -958,7 +958,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     //span.className = ''; className is guaranteed to be set in this specific case
                 }
                 else {
-                    span = EDITOR_span_rent();
+                    span = document.createElement('span');
                     div.appendChild(span);
                     childIndex++;
                 }
@@ -977,7 +977,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         span.className = '';
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -1016,7 +1016,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                     //span.className = ''; className is guaranteed to be set in this specific case
                 }
                 else {
-                    span = EDITOR_span_rent();
+                    span = document.createElement('span');
                     div.appendChild(span);
                     childIndex++;
                 }
@@ -1037,7 +1037,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                             span.className = '';
                         }
                         else {
-                            span = EDITOR_span_rent();
+                            span = document.createElement('span');
                             div.appendChild(span);
                             childIndex++;
                         }
@@ -1064,7 +1064,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -1085,7 +1085,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                             span.className = '';
                         }
                         else {
-                            span = EDITOR_span_rent();
+                            span = document.createElement('span');
                             div.appendChild(span);
                             childIndex++;
                         }
@@ -1111,7 +1111,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
                         //span.className = ''; className is guaranteed to be set in this specific case
                     }
                     else {
-                        span = EDITOR_span_rent();
+                        span = document.createElement('span');
                         div.appendChild(span);
                         childIndex++;
                     }
@@ -1134,7 +1134,7 @@ function JS_line_lex(div, substart, lineEnd, childIndex) {
             span.className = '';
         }
         else {
-            span = EDITOR_span_rent();
+            span = document.createElement('span');
             div.appendChild(span);
             childIndex++;
         }
