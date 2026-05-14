@@ -2119,4 +2119,10 @@ But I also just mentioned EXACTLY what I need to do then?
 	- [ ] Once I've solidified some of the way things are written then that makes more sense to me.
 	- [ ] But all of the code needs to change at all times nothing is correct there's too much of it
 	    and I'll spend time writing tests then break all of them and it is completely useless.
+
+That's also one of the worst feelings about all of this.
+There's many "best practices" to where given this specific scenario I am knowingly breaking them.
+And that I'd make arguments that you are wrong to follow many of the "best practices" in this scenario.
+But then I have the code public and I feel like people look at the code and see me doing things and think I'm just a complete moron.
+
 */
