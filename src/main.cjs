@@ -2128,4 +2128,8 @@ But then I have the code public and I feel like people look at the code and see 
 I get constant intrustive thoughts along the lines of
 "this is the best way to do it right now but I can't commit this people will think I'm a moron"
 
+Cause everything is just a perfect fairytale land and no amount of discretion is ever necessary when writing code.
+
+And I feel stupid I feel like I appear stupid to everyone around me and I'm constantly drowning in anxiety
+
 */
