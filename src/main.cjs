@@ -2112,4 +2112,6 @@ But I also just mentioned EXACTLY what I need to do then?
 - [ ] enter-key
 - [ ] tab-key
 - [ ] Does selection into { 'Shift' + 'Alt' + '>' } work when the two selections are on the same line? I don't remember.
+    - [ ] It seems to save out correctly but I on my screen see 'sqwerty sytrewq\nsqwerty' after having typed it out.
+	- [ ] I remember fixing this but I seem to have broken it at some point.
 */
