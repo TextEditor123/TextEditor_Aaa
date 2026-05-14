@@ -2177,4 +2177,7 @@ And then you continually revisit the drawing board and rinse and repeat.
 You add testing to this you'll be here for the rest of your life.
 Once I have a good solid set of initial constraints I might choose to test them then, but I need everything to stay very malleable.
 
+When rendering the UI you need to loop positionIndex ascending.
+This is because for the UI knowing the cumulative change caused by prior edits is NOT pointless overhead.
+You need to draw the cursors in the correct positions, relative the other pending edits.
 */
