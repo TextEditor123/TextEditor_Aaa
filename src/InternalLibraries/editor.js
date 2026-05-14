@@ -3357,7 +3357,7 @@ function EDITOR_editEvent(editKind, event) {
                 }
                 else {
                     if (cursor.editKind !== EditKind.BackspaceRtl) {
-                        EDITOR_startEdit(cursor, EditKind.BackspaceRtl, EDITOR_getPositionIndex(cursor), /*editLength*/ 0);
+                        EDITOR_startEdit(cursor, EditKind.BackspaceRtl, EDITOR_getPositionIndex_raw(cursor), /*editLength*/ 0);
                     }
                     EDITOR_backspaceDo(cursor, event);
                 }
