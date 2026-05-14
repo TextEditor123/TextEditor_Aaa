@@ -1017,6 +1017,8 @@ let EDITOR_offsetLine = 0;
 let EDITOR_offsetColumn_withRespectToThisIndexLine = 0;
 let EDITOR_offsetColumn = 0;
 let EDITOR_totalShift = 0;
+let EDITOR_offsetWithinSpan_withRespectToThisSpan = null;
+let EDITOR_offsetWithinSpan = 0;
 
 let EDITOR_findOverlay_wasSearched = false;
 
@@ -2655,11 +2657,17 @@ function EDITOR_insertDo(cursor, character) {
     make a copy of the span so you only have to "insert" text to the end of the span.
     And then this removes 1 of the slice invocations, rather than inserting "possibly" among the existing innerText.
     */
+    
+    if (cursor.gapBufferWriteToSpanElement !== EDITOR_offsetWithinSpan_withRespectToThisSpan) {
+        EDITOR_offsetWithinSpan = 0;
+        EDITOR_offsetWithinSpan_withRespectToThisSpan = cursor.gapBufferWriteToSpanElement;
+    }
+
     if (cursor.gapBufferWriteToSpanElement) {
         cursor.gapBufferWriteToSpanElement.innerText = 
-            cursor.gapBufferWriteToSpanElement.innerText.slice(0, cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + cursor.gapBufferCount) +
+            cursor.gapBufferWriteToSpanElement.innerText.slice(0, (cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + EDITOR_offsetWithinSpan) + cursor.gapBufferCount) +
             character +
-            cursor.gapBufferWriteToSpanElement.innerText.slice(cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + cursor.gapBufferCount);
+            cursor.gapBufferWriteToSpanElement.innerText.slice((cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + EDITOR_offsetWithinSpan) + cursor.gapBufferCount);
     }
 
     cursor.gapBuffer[cursor.gapBufferCount] = character.charCodeAt(0);
@@ -2667,6 +2675,8 @@ function EDITOR_insertDo(cursor, character) {
 
     cursor.editLength++;
     cursor.indexColumn++;
+
+    EDITOR_offsetWithinSpan += cursor.gapBufferCount;
 }
 
 /**
@@ -3432,6 +3442,8 @@ function EDITOR_registerHandlers() {
         EDITOR_offsetColumn_withRespectToThisIndexLine = 0;
         EDITOR_offsetColumn = 0;
         EDITOR_totalShift = 0;
+        EDITOR_offsetWithinSpan_withRespectToThisSpan = null;
+        EDITOR_offsetWithinSpan = 0;
 
         switch (event.key) {
             case 'ArrowLeft':
