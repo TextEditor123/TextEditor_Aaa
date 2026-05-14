@@ -3330,18 +3330,25 @@ function EDITOR_editEvent(editKind, event) {
             }
             break;
         case EditKind.DeleteLtr:
-            for (var i = EDITOR_cursorList.length - 1; i >= 0; i--) {
+            for (var i = 0; i < EDITOR_cursorList.length; i++) {
                 let cursor = EDITOR_cursorList[i];
+                EDITOR_indexCursor = i;
+                if (EDITOR_offsetColumn_withRespectToThisIndexLine !== cursor.indexLine) {
+                    EDITOR_offsetColumn_withRespectToThisIndexLine = cursor.indexLine;
+                    EDITOR_offsetColumn = 0;
+                }
                 if (cursor.hasSelection()) {
                     EDITOR_removeSelection(cursor); // when I delete a selection that contains a newline the edit length in my debug UI is 0?
                 }
                 else {
                     if (cursor.editKind !== EditKind.DeleteLtr) {
-                        EDITOR_startEdit(cursor, EditKind.DeleteLtr, EDITOR_getPositionIndex(cursor), /*editLength*/ 0);
+                        EDITOR_startEdit(cursor, EditKind.DeleteLtr, EDITOR_getPositionIndex_raw(cursor), /*editLength*/ 0);
                     }
                     EDITOR_deleteDo(cursor, event);
                 }
                 EDITOR_drawCursor(cursor);
+                EDITOR_offsetColumn -= cursor.editLength;
+                EDITOR_totalShift -= cursor.editLength; // this isn't needed here, but it is needed elsewhere so in order to create a pattern it was included here... TODO: maybe get rid of this or...?
             }
             break;
         case EditKind.BackspaceRtl:
