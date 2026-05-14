@@ -2180,4 +2180,20 @@ Once I have a good solid set of initial constraints I might choose to test them 
 When rendering the UI you need to loop positionIndex ascending.
 This is because for the UI knowing the cumulative change caused by prior edits is NOT pointless overhead.
 You need to draw the cursors in the correct positions, relative the other pending edits.
+
+When drawing the text there are two overarching categories to it:
+- scrollEvent
+- editEvent
+
+- scrollEvent (very concisely described)
+    - if currentScrollTop > previousScrollTop you move the first div of text to be the last line of text, and you change the text being displayed to reflect the line index that was just scrolled into view.
+	- if currentScrollTop < previousScrollTop you move the last line of text to be the first line of texxt, and you change the text being displayed to reflect the line index that was just scrolled into view.
+
+- editEvent
+	- If the line of text being edited is part of the "virtualization result" (the lines of text being rendered)
+        - Find the div that represents the line of text being edited.
+		- On each line are one or many spans.
+		- These spans provide the syntax highlighting.
+		- Thus, you need to walk that div you found, and determine which of the child spans contains the text being edited.
+		- Then you edit that span's innerText to reflect the pending edit.
 */
