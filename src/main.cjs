@@ -2196,4 +2196,9 @@ When drawing the text there are two overarching categories to it:
 		- These spans provide the syntax highlighting.
 		- Thus, you need to walk that div you found, and determine which of the child spans contains the text being edited.
 		- Then you edit that span's innerText to reflect the pending edit.
+
+- editEvent needs to be furthered:
+    - if there is another cursor on the same line that comes prior to the cursor you're trying to "render"
+	    you need to offset that cursor's column index by the cumulative columnIndex offset that was caused by every prior cursor on that line's edits
+	- if a cursor removes or adds a line, the latter cursors need to have their lineIndices offset when "rendering"
 */
