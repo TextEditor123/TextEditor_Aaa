@@ -2158,7 +2158,7 @@ I have a cursor with a selection at 's2' and 's3'.
 Each cursor's selection is anchored on the left of the character, and ends on the right of the character.
 The cursor itself is positioned on the right of the character (which as a rule the cursor and end of an existing selection are always equal positionIndex-wise)
 
-Any pending edit is stored relative to the raw text, and line endings.
+Any pending edit is stored relative to the raw text, and raw line endings.
 
 But, the UI needs to show the cursor and text relative to the pending edits.
 
@@ -2168,5 +2168,13 @@ Thus, when finalizing an edit you loop in reverse so you don't clobber the edits
 	 At this current moment however I'm not overly worried about undo and redo,
 	 because there are too many variables involved as it is, I need to solidify the non undo and redo
 	 solution so I can make sense of it all in my head.))
+
+Unit testing doesn't work well yet here, I said that but I have a good wording for things.
+Some problems that you are trying to solve entirely are dependent on having the initial constraints correct.
+And it isn't entirely obvious what the initial constraints should be.
+You need to hack pieces together and build some intuition, construct hypotheses, manually test by interacting with the system those hypotheses.
+And then you continually revisit the drawing board and rinse and repeat.
+You add testing to this you'll be here for the rest of your life.
+Once I have a good solid set of hypotheses I might choose to test them then, but I need everything to stay very malleable.
 
 */
