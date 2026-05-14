@@ -1930,6 +1930,12 @@ sec0*/
     - [ ] And sure the global scope might not be ideal but many of my use cases are currently exactly this cause I'm still class-encapsulating the logic.
 
 - [ ] More multicursor progress
+    - [ ] Line change (insertion or removal):
+	    - [ ] when only 1 cursor exists on the line
+	    - [ ] when more than 1 cursor exists on the line
+	- [ ] Tab change (insertion or removal):
+	    - [ ] when only 1 cursor exists on the line
+	    - [ ] when more than 1 cursor exists on the line
 
 - [ ] A completely in-memory file then save-as
 - [ ] save-as but for any file
