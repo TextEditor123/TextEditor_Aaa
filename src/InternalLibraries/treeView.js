@@ -396,7 +396,9 @@ class TreeViewComponent {
         this.event_scroll_async_bool = true;
 	    if (!this.event_scroll_async_timer) {
 	    	await this.event_scroll_async();
-            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why
+            // TODO: I'm not supposed to use 'this.' inside the 'setTimeout(...)' and I don't know why...
+            // ...this actually is wrong I'm getting errors on occassion that are non-fatal saying this function doesn't exist...
+            // ...I have other things to do at the moment though.
 	        this.event_scroll_async_timer = setTimeout(event_scroll_async_timeoutFunc, 100);
 	    }
     }
