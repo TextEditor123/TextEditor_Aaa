@@ -2114,4 +2114,9 @@ But I also just mentioned EXACTLY what I need to do then?
 - [ ] Does selection into { 'Shift' + 'Alt' + '>' } work when the two selections are on the same line? I don't remember.
     - [ ] It seems to save out correctly but I on my screen see 'sqwerty sytrewq\nsqwerty' after having typed it out.
 	- [ ] I remember fixing this but I seem to have broken it at some point.
+	- [ ] And I'd argue that testing the code at this stage is completely incorrect
+	- [ ] I have no idea how to make a text editor, I'm one person, I want to "move quickly and break things"
+	- [ ] Once I've solidified some of the way things are written then that makes more sense to me.
+	- [ ] But all of the code needs to change at all times nothing is correct there's too much of it
+	    and I'll spend time writing tests then break all of them and it is completely useless.
 */
