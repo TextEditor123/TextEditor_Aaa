@@ -2175,6 +2175,6 @@ And it isn't entirely obvious what the initial constraints should be.
 You need to hack pieces together and build some intuition, construct hypotheses, manually test by interacting with the system those hypotheses.
 And then you continually revisit the drawing board and rinse and repeat.
 You add testing to this you'll be here for the rest of your life.
-Once I have a good solid set of hypotheses I might choose to test them then, but I need everything to stay very malleable.
+Once I have a good solid set of initial constraints I might choose to test them then, but I need everything to stay very malleable.
 
 */
