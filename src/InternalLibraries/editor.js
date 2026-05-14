@@ -2646,41 +2646,6 @@ function EDITOR_startEdit(cursor, editKind, editPosition, editLength) {
 
 /**
  * @param {EDITOR_Cursor} cursor 
- * @param {string} character 
- */
-function EDITOR_insertDo(cursor, character) {
-    /*
-    TODO: (optimization idea) if you are inserting at the 0th or length position it might be worthwhile
-    to have a conditional branch make the innerText with 1 less slice invocation.
-
-    TODO: (optimization idea) I'm going to get this less optimized version to work, but you might want to
-    make a copy of the span so you only have to "insert" text to the end of the span.
-    And then this removes 1 of the slice invocations, rather than inserting "possibly" among the existing innerText.
-    */
-    
-    if (cursor.gapBufferWriteToSpanElement !== EDITOR_offsetWithinSpan_withRespectToThisSpan) {
-        EDITOR_offsetWithinSpan = 0;
-        EDITOR_offsetWithinSpan_withRespectToThisSpan = cursor.gapBufferWriteToSpanElement;
-    }
-
-    if (cursor.gapBufferWriteToSpanElement) {
-        cursor.gapBufferWriteToSpanElement.innerText = 
-            cursor.gapBufferWriteToSpanElement.innerText.slice(0, (cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + EDITOR_offsetWithinSpan) + cursor.gapBufferCount) +
-            character +
-            cursor.gapBufferWriteToSpanElement.innerText.slice((cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + EDITOR_offsetWithinSpan) + cursor.gapBufferCount);
-    }
-
-    cursor.gapBuffer[cursor.gapBufferCount] = character.charCodeAt(0);
-    cursor.gapBufferCount++;
-
-    cursor.editLength++;
-    cursor.indexColumn++;
-
-    EDITOR_offsetWithinSpan += cursor.gapBufferCount;
-}
-
-/**
- * @param {EDITOR_Cursor} cursor 
  * @param {*} indexCursor 
  * @returns 
  */
@@ -3380,8 +3345,13 @@ function EDITOR_editEvent(editKind, event) {
             }
             break;
         case EditKind.BackspaceRtl:
-            for (var i = EDITOR_cursorList.length - 1; i >= 0; i--) {
+            for (var i = 0; i < EDITOR_cursorList.length; i++) {
                 let cursor = EDITOR_cursorList[i];
+                EDITOR_indexCursor = i;
+                if (EDITOR_offsetColumn_withRespectToThisIndexLine !== cursor.indexLine) {
+                    EDITOR_offsetColumn_withRespectToThisIndexLine = cursor.indexLine;
+                    EDITOR_offsetColumn = 0;
+                }
                 if (cursor.hasSelection()) {
                     EDITOR_removeSelection(cursor);
                 }
@@ -3392,6 +3362,8 @@ function EDITOR_editEvent(editKind, event) {
                     EDITOR_backspaceDo(cursor, event);
                 }
                 EDITOR_drawCursor(cursor);
+                EDITOR_offsetColumn -= cursor.editLength;
+                EDITOR_totalShift -= cursor.editLength; // this isn't needed here, but it is needed elsewhere so in order to create a pattern it was included here... TODO: maybe get rid of this or...?
             }
             break;
         case EditKind.Tab:
@@ -6207,6 +6179,41 @@ function EDITOR_backspaceDo(cursor, event) {
             }
         }
     }
+}
+
+/**
+ * @param {EDITOR_Cursor} cursor 
+ * @param {string} character 
+ */
+function EDITOR_insertDo(cursor, character) {
+    /*
+    TODO: (optimization idea) if you are inserting at the 0th or length position it might be worthwhile
+    to have a conditional branch make the innerText with 1 less slice invocation.
+
+    TODO: (optimization idea) I'm going to get this less optimized version to work, but you might want to
+    make a copy of the span so you only have to "insert" text to the end of the span.
+    And then this removes 1 of the slice invocations, rather than inserting "possibly" among the existing innerText.
+    */
+    
+    if (cursor.gapBufferWriteToSpanElement !== EDITOR_offsetWithinSpan_withRespectToThisSpan) {
+        EDITOR_offsetWithinSpan = 0;
+        EDITOR_offsetWithinSpan_withRespectToThisSpan = cursor.gapBufferWriteToSpanElement;
+    }
+
+    if (cursor.gapBufferWriteToSpanElement) {
+        cursor.gapBufferWriteToSpanElement.innerText = 
+            cursor.gapBufferWriteToSpanElement.innerText.slice(0, (cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + EDITOR_offsetWithinSpan) + cursor.gapBufferCount) +
+            character +
+            cursor.gapBufferWriteToSpanElement.innerText.slice((cursor.gapBufferWriteToSpanElement_SpanTextContentRelativeIndex + EDITOR_offsetWithinSpan) + cursor.gapBufferCount);
+    }
+
+    cursor.gapBuffer[cursor.gapBufferCount] = character.charCodeAt(0);
+    cursor.gapBufferCount++;
+
+    cursor.editLength++;
+    cursor.indexColumn++;
+
+    EDITOR_offsetWithinSpan += cursor.gapBufferCount;
 }
 
 function EDITOR_stopTrackingIfTrackedSyntaxMadeToSpanSingleLine(cursor) {
