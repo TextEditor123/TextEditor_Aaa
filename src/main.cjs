@@ -2146,7 +2146,7 @@ s
 ```
 
 Mark each 's' with a number so they can be identified individually
-A selection into { 'Shift' + 'Alt' + '>' } puts a cursor and selection at the next matching text.
+A selection into { 'Shift' + 'Alt' + '>' } puts a cursor with a selection at the next matching text.
 Thus the text has to be equivalent, i.e.: they're all the letter 's' but I'm adding a number so I can describe things.
 `````
 s1 s2
@@ -2157,5 +2157,16 @@ I select 's2' then I do the { 'Shift' + 'Alt' + '>' }.
 I have a cursor with a selection at 's2' and 's3'.
 Each cursor's selection is anchored on the left of the character, and ends on the right of the character.
 The cursor itself is positioned on the right of the character (which as a rule the cursor and end of an existing selection are always equal positionIndex-wise)
+
+Any pending edit is stored relative to the raw text, and line endings.
+
+But, the UI needs to show the cursor and text relative to the pending edits.
+
+Thus, when finalizing an edit you loop in reverse so you don't clobber the edits that come consecutively
+(if you loop positionIndex ascending you'd have to offset the next edit relative to the cumulative change caused by the prior edits and it is just pointless overhead in relation to finalization
+    (BUT, perhaps it could be useful with relation to edit history and { 'Ctrl' + 'z' } / { 'Ctrl' + 'y' }.
+	 At this current moment however I'm not overly worried about undo and redo,
+	 because there are too many variables involved as it is, I need to solidify the non undo and redo
+	 solution so I can make sense of it all in my head.))
 
 */
