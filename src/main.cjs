@@ -2132,4 +2132,9 @@ Cause everything is just a perfect fairytale land and no amount of discretion is
 
 And I feel stupid I feel like I appear stupid to everyone around me and I'm constantly drowning in anxiety
 
+
+There's a stereotype about programmers and them being robotic and emotionless.
+Nothing is more emotional than writing a solo project like this.
+It is the most extreme emotional rollercoaster I've ever felt.
+
 */
