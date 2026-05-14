@@ -2090,4 +2090,13 @@ So I'm gonna deliberatly plan to:
 - [ ] do more?
 - [ ] maybe you take a break and come back later?
 - [ ] ???
+
+What I feel is I think specifically "procrastination".
+I'm intimidated by multicursor and you combine that with the non-stop attempts to progress and I'm
+tired and I think of the multicursor and I think no it freaks me out too much it causes a feeling of fear
+and I'm too tired to bother with combating with that fear so I'm gonna spend the rest
+of my life fixing things that don't cause that fear
+...
+I'm gonna just single out one thing and then fix it.
+
 */
