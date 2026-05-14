@@ -1043,15 +1043,37 @@ or you could do both?
 
 If you return the span to the pool you should it from the parent?
 
-return:miss_800
 rent:hit_2120
 rent:miss_1169
+return:miss_800
 return:hit_2133
 
 
  */
 
 const spanPool = [];
+
+
+
+function EDITOR_span_rent() {
+    if (spanPool.length > 0) {
+        return spanPool.pop();
+    }
+    return document.createElement('span');
+}
+
+
+function EDITOR_span_return(span) {
+    if (spanPool.length < 20) {
+        spanPool.push(span);
+    }
+    span.innerText = '';
+    span.className = '';
+    span.parentElement.removeChild(span);
+}
+
+/*
+// This multi-line comment is duplicated code for the functions of the same name but includes console.log messages to get an idea of the occurrence count of each conditional branch.
 
 let rentHit = 0;
 let rentMiss = 0;
@@ -1080,6 +1102,7 @@ function EDITOR_span_return(span) {
     span.className = '';
     span.parentElement.removeChild(span);
 }
+*/
 
 
 /**
