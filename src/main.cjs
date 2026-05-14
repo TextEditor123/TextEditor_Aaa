@@ -2201,4 +2201,8 @@ When drawing the text there are two overarching categories to it:
     - if there is another cursor on the same line that comes prior to the cursor you're trying to "render"
 	    you need to offset that cursor's column index by the cumulative columnIndex offset that was caused by every prior cursor on that line's edits
 	- if a cursor removes or adds a line, the latter cursors need to have their lineIndices offset when "rendering"
+	- I think there is a third case, if two cursors are on the same line, and you split a line of text such that some other cursor
+	    exists on the latter part of that line of text that you just split with a lineFeed via the prior cursor.
+		- you'd need to do something funky here.
+		- I probably would just finalize the edits in this moment and start new ones I'm not sure.
 */
