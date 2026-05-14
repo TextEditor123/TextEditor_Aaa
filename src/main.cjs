@@ -2125,4 +2125,7 @@ There's many "best practices" to where given this specific scenario I am knowing
 And that I'd make arguments that you are wrong to follow many of the "best practices" in this scenario.
 But then I have the code public and I feel like people look at the code and see me doing things and think I'm just a complete moron.
 
+I get constant intrustive thoughts along the lines of
+"this is the best way to do it right now but I can't commit this people will think I'm a moron"
+
 */
