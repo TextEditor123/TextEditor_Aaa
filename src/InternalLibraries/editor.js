@@ -1042,8 +1042,45 @@ or you could spanPool
 or you could do both?
 
 If you return the span to the pool you should it from the parent?
- * /
-// const spanPool = [];
+
+return:miss_800
+rent:hit_2120
+rent:miss_1169
+return:hit_2133
+
+
+ */
+
+const spanPool = [];
+
+let rentHit = 0;
+let rentMiss = 0;
+
+let returnHit = 0;
+let returnMiss = 0;
+
+function EDITOR_span_rent() {
+    if (spanPool.length > 0) {
+    	console.log(`rent:hit_${++rentHit}`);
+        return spanPool.pop();
+    }
+    console.log(`rent:miss_${++rentMiss}`);
+    return document.createElement('span');
+}
+
+function EDITOR_span_return(span) {
+    if (spanPool.length < 20) {
+    	console.log(`return:hit_${++returnHit}`);
+        spanPool.push(span);
+    }
+    else {
+    	console.log(`return:miss_${++returnMiss}`);
+    }
+    span.innerText = '';
+    span.className = '';
+    span.parentElement.removeChild(span);
+}
+
 
 /**
  * @param {*} indexLine
@@ -5358,7 +5395,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
             span.className = '';
 		}
 		else {
-			div.appendChild(document.createElement('span'));
+			div.appendChild(EDITOR_span_rent());
             childIndex++;
 		}
     }
@@ -5393,7 +5430,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
                     //span.className = ''; className is guaranteed to be set in this specific case
 				}
 				else {
-					span = document.createElement('span');
+					span = EDITOR_span_rent();
                     div.appendChild(span);
                     childIndex++;
 				}
@@ -5429,7 +5466,7 @@ function EDITOR_createSpansForLineOfText(div, line, trackedSyntax_I) {
 
     let aaa = div.children.length - childIndex;
     for (let i = 0; i < aaa; i++) {
-        div.removeChild(div.children[childIndex]);
+        EDITOR_span_return(div.children[childIndex]);
     }
 
     return trackedSyntax_I;
@@ -7879,7 +7916,7 @@ function PLAINTEXT_line_lex(div, substart, lineEnd, childIndex) {
             span.className = '';
         }
         else {
-            span = document.createElement('span');
+            span = EDITOR_span_rent();
             div.appendChild(span);
             childIndex++;
         }
