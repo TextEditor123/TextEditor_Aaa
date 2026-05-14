@@ -1045,27 +1045,27 @@ If you return the span to the pool you should it from the parent?
 
 rent:hit_2120
 rent:miss_1169
-return:miss_800
 return:hit_2133
+return:miss_800
 
 
  */
 
-const spanPool = [];
+const EDITOR_spanPool = [];
 
 
 
 function EDITOR_span_rent() {
-    if (spanPool.length > 0) {
-        return spanPool.pop();
+    if (EDITOR_spanPool.length > 0) {
+        return EDITOR_spanPool.pop();
     }
     return document.createElement('span');
 }
 
 
 function EDITOR_span_return(span) {
-    if (spanPool.length < 20) {
-        spanPool.push(span);
+    if (EDITOR_spanPool.length < 20) {
+        EDITOR_spanPool.push(span);
     }
     span.innerText = '';
     span.className = '';
