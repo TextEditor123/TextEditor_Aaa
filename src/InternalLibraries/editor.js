@@ -1033,6 +1033,18 @@ let EDITOR_onScroll_bool = false;
 
 let EDITOR_decode_pooled_stringBuilder_array = [];
 
+/*
+you could have a minimum count of spans that a div has to contain.
+Such that if you only need 1, you make the other 4 display:none and innerText=''
+
+or you could spanPool
+
+or you could do both?
+
+If you return the span to the pool you should it from the parent?
+ * /
+// const spanPool = [];
+
 /**
  * @param {*} indexLine
  * @returns {number} the last valid POSITION index on the line, but with respect to any pending edits.
