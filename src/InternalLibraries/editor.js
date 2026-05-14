@@ -1048,13 +1048,14 @@ rent:miss_1169
 return:hit_2133
 return:miss_800
 
-
+What've I done I don't have time for this lol I'm commenting it all out and putting it back so I can go to sleep.
  */
 
-const EDITOR_spanPool = [];
+// const EDITOR_spanPool = [];
 
 
 
+/*
 function EDITOR_span_rent() {
     if (EDITOR_spanPool.length > 0) {
         return EDITOR_spanPool.pop();
@@ -1064,13 +1065,14 @@ function EDITOR_span_rent() {
 
 
 function EDITOR_span_return(span) {
-    if (EDITOR_spanPool.length < 20) {
+    if (EDITOR_spanPool.length < 40) {
         EDITOR_spanPool.push(span);
     }
     span.innerText = '';
     span.className = '';
     span.parentElement.removeChild(span);
 }
+*/
 
 /*
 // This multi-line comment is duplicated code for the functions of the same name but includes console.log messages to get an idea of the occurrence count of each conditional branch.
@@ -1082,18 +1084,18 @@ let returnHit = 0;
 let returnMiss = 0;
 
 function EDITOR_span_rent() {
-    if (spanPool.length > 0) {
+    if (EDITOR_spanPool.length > 0) {
     	console.log(`rent:hit_${++rentHit}`);
-        return spanPool.pop();
+        return EDITOR_spanPool.pop();
     }
     console.log(`rent:miss_${++rentMiss}`);
     return document.createElement('span');
 }
 
 function EDITOR_span_return(span) {
-    if (spanPool.length < 20) {
+    if (EDITOR_spanPool.length < 40) {
     	console.log(`return:hit_${++returnHit}`);
-        spanPool.push(span);
+        EDITOR_spanPool.push(span);
     }
     else {
     	console.log(`return:miss_${++returnMiss}`);
